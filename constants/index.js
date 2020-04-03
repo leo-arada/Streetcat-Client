@@ -1,0 +1,16 @@
+export const LOADING = 'LOADING';
+export const POSTER  = 'POSTER';
+export const COMMENTER = 'COMMENTER';
+export const FETCH_DEFAULT_DATA = 'FETCH_DEFAULT_DATA';
+export const FETCH_USER_DATA = 'FETCH_USER_DATA';
+export const FETCH_COMMENT_DATA = 'FETCH_COMMENT_DATA';
+export const LIKE_CAT = 'LIKE_CAT';
+export const MODIFY_CAT = 'MODIFY_CAT';
+export const DELETE_CAT = 'DELETE_CAT';
+export const LOG_IN = 'LOG_IN';
+export const LOG_IN_SUCCESS = 'LOG_IN_SUCCESS';
+export const LOG_IN_FAILURE = 'LOG_IN_FAILURE';
+export const LOG_OUT = 'LOG_OUT';
+export const ADD_NEW_CAT = 'ADD_NEW_CAT';
+export const ADD_NEW_COMMENT = 'ADD_NEW_COMMENT';
+export const REFRESH = 'REFRESH';
