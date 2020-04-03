@@ -2,25 +2,25 @@ import React from 'react';
 import { StyleSheet, View, Text, Button } from 'react-native';
 import { CommonActions, StackActions  } from '@react-navigation/native';
 import * as Facebook from 'expo-facebook';
+import { useSelector, useDispatch } from 'react-redux';
+import { APP_ID, SERVER_API } from 'react-native-dotenv';
 
-const LogInScreen = ({ navigation }) => {
+const LogInScreen = (props) => {
+  const { fetchFacebookData, isLoading } = props.containerProps;
+  const { navigation }  = props;
 
-  const login = async () => {
-    const ff = await Facebook.logInWithReadPermissionsAsync('<APP_ID>', { permission: ['public_profile'] });
-    console.log(ff);
+  const goToHomeScreen = () => {
+    fetchFacebookData();
+    navigation.dispatch(
+      StackActions.replace('Home')
+    )
   };
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Button 
         title="google login"
-        onPress={() => {
-          login();
-          navigation.dispatch(
-            StackActions.replace('Home')
-          )
-        }
-        }     
+        onPress={goToHomeScreen}     
       />
     </View>
   );
