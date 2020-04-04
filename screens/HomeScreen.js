@@ -1,11 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { StyleSheet, View, Text, Button, Dimensions } from 'react-native';
 import MapView, { PROVIDER_GOOGLE, Marker } from 'react-native-maps';
+import getToken from '../utils/getToken';
+import { APP_ID, SERVER_API } from 'react-native-dotenv';
 // import { Constants, Location, Permissions } from 'expo';
 
 const HomeScreen = (props) => {
   const { latitude, longitude } = props.containerProps.location;
   console.log(latitude, longitude);
+
+  useEffect(() => {
+    getToken(`${SERVER_API}/cats`);
+  }, [])
 
   return (
     <View style={styles.container}>

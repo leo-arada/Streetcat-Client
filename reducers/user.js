@@ -7,13 +7,12 @@ const initialState = {
   cats: null,
 }
 
-
 const user = (state = initialState, action) => {
   switch(action.type) {
     case LOG_IN_SUCCESS:
       return {
         ...state,
-        ...action.user,
+        ...action.data.user,
       }
     case LOCATION_SUCCESS:
       return {

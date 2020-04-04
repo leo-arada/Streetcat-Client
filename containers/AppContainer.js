@@ -5,7 +5,8 @@ import { logInSuccess, error, locationSuccess } from '../actions';
 import AppNavigator from '../navigation/AppNavigator';
 import * as Facebook from 'expo-facebook';
 import { APP_ID, SERVER_API } from 'react-native-dotenv';
-import  saveToken from '../utils/saveToken'
+import saveToken from '../utils/saveToken'
+import getToken from '../utils/getToken';
 import { AsyncStorage } from 'react-native';
 
 const AppContainer = () => {
@@ -35,9 +36,9 @@ const AppContainer = () => {
           
           const data = await response.json();
           console.log(data)
-          console.log(55555555555555)
-          dispatch(logInSuccess(data.user));
-          saveToken('token', data.token);
+
+          dispatch(logInSuccess(data));
+          saveToken('token', data.token, 'userId', id);
         } 
       } catch ({ message }) {
         alert(`Facebook Login Error: ${message}`);
@@ -48,7 +49,8 @@ const AppContainer = () => {
     },
     saveLocation(location) {
       dispatch(locationSuccess(location));
-    }
+    },
+
   }
 
 
