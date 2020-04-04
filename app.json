@@ -24,7 +24,7 @@
     },
     "android": {
       "package": "streetcat.android",
-      "config": { "googleMaps": { "apiKey": "dd" } }
+      "config": { "googleMaps": { "apiKey": "" } }
     }
   }
 }

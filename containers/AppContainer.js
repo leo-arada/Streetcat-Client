@@ -24,6 +24,7 @@ const AppContainer = () => {
           permissions: ['public_profile'],
         });
         if (type === 'success') {
+          console.log(11111111111111111111111111111)
           const fetchedData = await fetch(`https://graph.facebook.com/me?access_token=${token}`);
           const { id, name } = await fetchedData.json();
           const response = await fetch(`${SERVER_API}/auth/login`, {
@@ -31,7 +32,10 @@ const AppContainer = () => {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ facebookId: id, name }),
           });
+          
           const data = await response.json();
+          console.log(data)
+          console.log(55555555555555)
           dispatch(logInSuccess(data.user));
           saveToken('token', data.token);
         } 
