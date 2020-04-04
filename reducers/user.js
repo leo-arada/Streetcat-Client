@@ -1,4 +1,4 @@
-import { LOG_IN_SUCCESS } from '../constants/index'
+import { LOG_IN_SUCCESS, LOCATION_SUCCESS } from '../constants/index'
 
 const initialState = {
   facebookId: null,
@@ -11,11 +11,14 @@ const initialState = {
 const user = (state = initialState, action) => {
   switch(action.type) {
     case LOG_IN_SUCCESS:
-      console.log(action)
-      console.log(111111)
       return {
         ...state,
         ...action.user,
+      }
+    case LOCATION_SUCCESS:
+      return {
+        ...state,
+        location: action.location,
       }
     default:
       return {

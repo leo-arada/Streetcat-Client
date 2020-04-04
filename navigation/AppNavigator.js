@@ -10,13 +10,15 @@ const Stack = createStackNavigator();
 
 const AppNavigator = ({ containerProps }) => {
   const { isLoggedIn } = containerProps;
-
+ 
   return (
     <NavigationContainer>
       <Stack.Navigator>
         {isLoggedIn ? (
           <>
-            <Stack.Screen name="Home" component={HomeScreen} options={{ title: 'Home' }} />
+            <Stack.Screen name="Home" options={{ title: 'Home' }}>
+              {props => <HomeScreen {...props} containerProps={containerProps} />}
+            </Stack.Screen>
             <Stack.Screen name="Cat" component={CatScreen} options={{ title: 'Cat' }} />  
           </>
         ) : (
@@ -24,7 +26,9 @@ const AppNavigator = ({ containerProps }) => {
             <Stack.Screen name="Login" options={{ title: '로그인안하냥' }}>
               {props => <LoginScreen {...props} containerProps={containerProps} />}
             </Stack.Screen>
-            <Stack.Screen name="Loading" component={LoadingScreen} options={{ headerShown: false }} />
+            {/* <Stack.Screen name="Loading" options={{ headerShown: false }}>
+              {props => <LoadingScreen {...props} isLoggedIn={isLoggedIn} />}
+            </Stack.Screen> */}
           </>
         )}
         {/* <Stack.Screen name="Login" component={LoginScreen} options={{ title: '로그인안하냥' }} /> */}

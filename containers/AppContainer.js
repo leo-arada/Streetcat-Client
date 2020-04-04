@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
-import { logInSuccess } from '../actions';
+import { logInSuccess, error, locationSuccess } from '../actions';
 import AppNavigator from '../navigation/AppNavigator';
 import * as Facebook from 'expo-facebook';
 import { APP_ID, SERVER_API } from 'react-native-dotenv';
@@ -9,11 +9,14 @@ import  saveToken from '../utils/saveToken'
 import { AsyncStorage } from 'react-native';
 
 const AppContainer = () => {
-  const { isLoggedIn }= useSelector(state => state.render);
+  const { isLoggedIn, isError }= useSelector(state => state.render);
+  const { location }= useSelector(state => state.user);
   const dispatch = useDispatch();
 
   const props = {
     isLoggedIn,
+    isError,
+    location,
     async fetchFacebookData() {
       try {
         await Facebook.initializeAsync(APP_ID);
@@ -31,12 +34,17 @@ const AppContainer = () => {
           const data = await response.json();
           dispatch(logInSuccess(data.user));
           saveToken('token', data.token);
-        } else {
-        }
+        } 
       } catch ({ message }) {
         alert(`Facebook Login Error: ${message}`);
       }
     },
+    changeErrorState(message) {
+      dispatch(error(message));
+    },
+    saveLocation(location) {
+      dispatch(locationSuccess(location));
+    }
   }
 
 

@@ -1,4 +1,4 @@
-import { LOG_IN_SUCCESS } from '../constants/index'
+import { LOG_IN_SUCCESS, ERROR } from '../constants/index'
 
 const initialState = {
   isLoggedIn: false,
@@ -9,10 +9,14 @@ const initialState = {
 const render = (state = initialState, action) => {
   switch(action.type) {
     case LOG_IN_SUCCESS:
-      console.log(action)
       return {
         ...state,
         isLoggedIn: true,
+      }
+    case ERROR:
+      return {
+        ...state,
+        isError: true,
       }
     default:
       return {

@@ -23,7 +23,8 @@
       "supportsTablet": true
     },
     "android": {
-      "config": { "googleMaps": { "apiKey": "dddd" } }
+      "package": "streetcat.android",
+      "config": { "googleMaps": { "apiKey": "dd" } }
     }
   }
 }

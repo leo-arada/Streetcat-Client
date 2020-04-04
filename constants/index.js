@@ -14,3 +14,5 @@ export const LOG_OUT = 'LOG_OUT';
 export const ADD_NEW_CAT = 'ADD_NEW_CAT';
 export const ADD_NEW_COMMENT = 'ADD_NEW_COMMENT';
 export const REFRESH = 'REFRESH';
+export const ERROR = 'ERROR';
+export const LOCATION_SUCCESS = 'LOCATION_SUCCESS';
