@@ -9,11 +9,11 @@ import  saveToken from '../utils/saveToken'
 import { AsyncStorage } from 'react-native';
 
 const AppContainer = () => {
-  const [isLoading, setIsLoading] = useState(false);
+  const { isLoggedIn }= useSelector(state => state.render);
   const dispatch = useDispatch();
 
   const props = {
-    isLoading,
+    isLoggedIn,
     async fetchFacebookData() {
       try {
         await Facebook.initializeAsync(APP_ID);

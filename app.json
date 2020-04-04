@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "HelloWorld",
-    "slug": "front-end",
+    "name": "Streetcat",
+    "slug": "Streetcat",
     "platforms": [
       "android",
       "web"
@@ -21,6 +21,9 @@
     ],
     "ios": {
       "supportsTablet": true
+    },
+    "android": {
+      "config": { "googleMaps": { "apiKey": "dddd" } }
     }
   }
 }

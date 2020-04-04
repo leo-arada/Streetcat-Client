@@ -6,14 +6,12 @@ import { useSelector, useDispatch } from 'react-redux';
 import { APP_ID, SERVER_API } from 'react-native-dotenv';
 
 const LogInScreen = (props) => {
-  const { fetchFacebookData, isLoading } = props.containerProps;
+  const { fetchFacebookData } = props.containerProps;
   const { navigation }  = props;
-
+  
   const goToHomeScreen = () => {
+    navigation.navigate('Loading')
     fetchFacebookData();
-    navigation.dispatch(
-      StackActions.replace('Home')
-    )
   };
 
   return (

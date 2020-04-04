@@ -1,16 +1,12 @@
 import React from 'react';
 import { StyleSheet, View, Text, Button } from 'react-native';
-import MapView from 'react-native-maps';
+import { CommonActions, StackActions  } from '@react-navigation/native';
 
-const HomeScreen = ({ navigation }) => {
+const LoadingScreen = () => {
+
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Button 
-        title="캣"
-        onPress={() => 
-          navigation.push('Cat')
-        }
-      />
+     <Text>Loading</Text>
     </View>
   );
 };
@@ -24,4 +20,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default HomeScreen;
+export default LoadingScreen;
