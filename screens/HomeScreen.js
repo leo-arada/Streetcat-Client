@@ -10,7 +10,7 @@ const HomeScreen = (props) => {
   console.log(latitude, longitude);
 
   useEffect(() => {
-    getToken(`${SERVER_API}/cats`);
+    getToken(`${SERVER_API}/cat`);
   }, [])
 
   return (

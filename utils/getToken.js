@@ -10,7 +10,11 @@ const getToken = async (api) => {
     }
   })
 
-  console.log(token);
+  const { result } = await response.json();
+  // if (result !== loggedIn) {
+    ///change login status
+  // }
+  console.log(result);
   return ;
 };
 
