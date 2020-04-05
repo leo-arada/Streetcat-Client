@@ -6,12 +6,12 @@ import { useSelector, useDispatch } from 'react-redux';
 import getToken from '../utils/getToken';
 import { SERVER_API } from 'react-native-dotenv';
 
-const HomeContainer = () => {
+const HomeContainer = ({ navigation }) => {
   const dispatch = useDispatch();
   const { latitude, longitude }= useSelector(state => state.user.location);
   const { catsAroud } = useSelector(state => state.cat);
   const [newLocation, setNewLocaiton] = useState({ latitude, longitude });
-
+  // console.log(navigation)
 
   const onPresshandler = (e) => {
     console.log('렌더링')
@@ -25,7 +25,12 @@ const HomeContainer = () => {
   }, [newLocation]);
 
   return (
-    <HomeScreen location={newLocation} nearCat={catsAroud} onPresshandler={onPresshandler}/>
+    <HomeScreen 
+      location={newLocation} 
+      nearCat={catsAroud} 
+      onPresshandler={onPresshandler}
+      navigation={navigation}
+    />
   );
 };
 
