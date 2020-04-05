@@ -17,12 +17,13 @@ const cat = (state = initialState, action) => {
     case FETCH_DEFAULT_CAT_DATA:
       const { catLists } = state;
       const { latitude, longitude } = action.location;
+      console.log(latitude, longitude);
       const catsAroud = catLists.filter((cat) => {
         const distance = getDistance(
           { latitude, longitude },
           { latitude: cat.location[0], longitude: cat.location[1] }
         );
-        if (distance < 5000) {
+        if (distance < 500) {
           return cat;
         }
       });

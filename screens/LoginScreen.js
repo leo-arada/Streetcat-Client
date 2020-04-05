@@ -1,18 +1,9 @@
-import React, { useEffect, useCallback } from 'react';
+import React from 'react';
 import { StyleSheet, View, Text, Button } from 'react-native';
 import { CommonActions, StackActions  } from '@react-navigation/native';
-import * as Permissions from 'expo-permissions';
-import useFetch from '../utils/useFetch';
 
-const LogInScreen = (props) => {
-  const { fetchFacebookData, saveLocation } = props.containerProps;
-  const { navigation }  = props;
-  const location = useFetch(saveLocation);
-  const logIn = () => {
-    fetchFacebookData();
-    // navigation.navigate('Loading')
-  };
-
+const LogInScreen = ({ fetchFacebookData }) => {
+  console.log(fetchFacebookData);
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       {/* { location ? (
@@ -23,7 +14,7 @@ const LogInScreen = (props) => {
       ) :alert('asdfsdfasdf')} */}
       <Button 
          title="google login"
-         onPress={logIn}     
+         onPress={fetchFacebookData}     
        />   
     </View>
   );

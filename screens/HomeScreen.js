@@ -1,36 +1,35 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { StyleSheet, View, Text, Button, Dimensions, Image } from 'react-native';
 import MapView, { PROVIDER_GOOGLE, Marker } from 'react-native-maps';
-import getToken from '../utils/getToken';
-import { APP_ID, SERVER_API } from 'react-native-dotenv';
-// import { Constants, Location, Permissions } from 'expo';
 
-const HomeScreen = (props) => {
-  // console.log(props)
-  const { latitude, longitude } = props.containerProps.location;
-  const { fetchCatsData, catsAroud } = props.containerProps;
-
-  // console.log(latitude, longitude);
-  console.log(catsAroud, '홈스크린');
-
-  useEffect(() => {
-    getToken(`${SERVER_API}/cat`);
-    fetchCatsData({ latitude, longitude });
-  }, [])
-
+const HomeScreen = ({ location, nearCat, onPresshandler}) => {
   return (
     <View style={styles.container}>
-      <MapView 
+      <MapView
+        onPress={onPresshandler}
         provider={PROVIDER_GOOGLE}
         style={styles.map}
         region={{
-          latitude,
-          longitude,
+          latitude: location.latitude,
+          longitude: location.longitude,
           latitudeDelta: 0.001,
           longitudeDelta: 0.001,
         }}
       >
-        {catsAroud.map((cat, i) => (
+        <Marker
+          coordinate={{ latitude: location.latitude, longitude: location.longitude }}
+        >
+          <View style={styles.markerBox}>
+              <Text style={styles.pinText}>현재위치</Text>
+              <Image
+                style={styles.image}
+                source={{
+                  uri: "https://cdn1.iconfinder.com/data/icons/social-messaging-ui-color/254000/66-512.png"
+                }}
+              />
+            </View>
+        </Marker>
+        {nearCat.map((cat, i) => (
           <Marker
             key={i}
             // style={{ width: '100%'}}
@@ -48,7 +47,6 @@ const HomeScreen = (props) => {
           </Marker>
         ))}
       </MapView>
-       
     </View>
   );
 };
