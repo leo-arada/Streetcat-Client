@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import * as Permissions from 'expo-permissions';
 import * as Location from 'expo-location';
 
@@ -17,6 +18,7 @@ const useFetch = (saveLocation) => {
     console.log(latitude, longitude)
     //  console.log(latitude, longitude)
      setLocation(location);
+     
      saveLocation({ latitude, longitude});
   };
 

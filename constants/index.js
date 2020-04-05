@@ -1,7 +1,7 @@
 export const LOADING = 'LOADING';
 export const POSTER  = 'POSTER';
 export const COMMENTER = 'COMMENTER';
-export const FETCH_DEFAULT_DATA = 'FETCH_DEFAULT_DATA';
+export const FETCH_DEFAULT_CAT_DATA = 'FETCH_DEFAULT_CAT_DATA';
 export const FETCH_USER_DATA = 'FETCH_USER_DATA';
 export const FETCH_COMMENT_DATA = 'FETCH_COMMENT_DATA';
 export const LIKE_CAT = 'LIKE_CAT';

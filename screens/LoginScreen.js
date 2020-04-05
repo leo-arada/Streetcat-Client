@@ -3,6 +3,7 @@ import { StyleSheet, View, Text, Button } from 'react-native';
 import { CommonActions, StackActions  } from '@react-navigation/native';
 import * as Permissions from 'expo-permissions';
 import useFetch from '../utils/useFetch';
+
 const LogInScreen = (props) => {
   const { fetchFacebookData, saveLocation } = props.containerProps;
   const { navigation }  = props;

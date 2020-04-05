@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
-import { logInSuccess, error, locationSuccess } from '../actions';
+import { logInSuccess, error, locationSuccess, catsData } from '../actions';
 import AppNavigator from '../navigation/AppNavigator';
 import * as Facebook from 'expo-facebook';
 import { APP_ID, SERVER_API } from 'react-native-dotenv';
@@ -11,10 +11,13 @@ import { AsyncStorage } from 'react-native';
 
 const AppContainer = () => {
   const { isLoggedIn, isError }= useSelector(state => state.render);
+  const { catsAroud } = useSelector(state => state.cat);
   const { location }= useSelector(state => state.user);
   const dispatch = useDispatch();
-
+  
+  // console.log(catsAroud, '주위고양이들');
   const props = {
+    catsAroud,
     isLoggedIn,
     isError,
     location,
@@ -25,7 +28,6 @@ const AppContainer = () => {
           permissions: ['public_profile'],
         });
         if (type === 'success') {
-          console.log(11111111111111111111111111111)
           const fetchedData = await fetch(`https://graph.facebook.com/me?access_token=${token}`);
           const { id, name } = await fetchedData.json();
           const response = await fetch(`${SERVER_API}/auth/login`, {
@@ -33,10 +35,7 @@ const AppContainer = () => {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ facebookId: id, name }),
           });
-          
           const data = await response.json();
-          console.log(data)
-
           dispatch(logInSuccess(data));
           saveToken('token', data.token, 'userId', id);
         } 
@@ -50,7 +49,9 @@ const AppContainer = () => {
     saveLocation(location) {
       dispatch(locationSuccess(location));
     },
-
+    fetchCatsData() {
+      dispatch(catsData(location))
+    },
   }
 
 
