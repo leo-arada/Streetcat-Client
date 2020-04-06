@@ -12,16 +12,16 @@ const render = (state = initialState, action) => {
       return {
         ...state,
         isLoggedIn: true,
-      }
+      };
     case ERROR:
       return {
         ...state,
         isError: true,
-      }
+      };
     default:
       return {
         ...state,
-      }
+      };
   }
 };
 

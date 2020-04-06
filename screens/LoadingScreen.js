@@ -1,8 +1,8 @@
 import React from 'react';
-import { StyleSheet, View, Text, Button } from 'react-native';
-import { CommonActions, StackActions  } from '@react-navigation/native';
+import { StyleSheet, View, Text } from 'react-native';
 
-const LoadingScreen = ({ isLoggedIn }) => {
+
+const LoadingScreen = () => {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
      <Text>Loading</Text>

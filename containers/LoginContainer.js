@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, Text, Button, Dimensions, Image } from 'react-native';
+import React from 'react';
 import { APP_ID, SERVER_API } from 'react-native-dotenv';
 import * as Facebook from 'expo-facebook';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import saveToken from '../utils/saveToken';
-import { logInSuccess, error, locationSuccess, catsData } from '../actions';
+import { logInSuccess, locationSuccess } from '../actions';
 import useFetch from '../utils/useFetch';
 import LoginScreen from '../screens/LoginScreen';
 
@@ -15,7 +14,7 @@ const LoginContainer = () => {
     dispatch(locationSuccess(location));
   };
 
-  const location = useFetch(saveLocation);
+  useFetch(saveLocation);
 
   const fetchFacebookData = async () => {
     try {

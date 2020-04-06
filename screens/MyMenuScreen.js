@@ -1,11 +1,9 @@
 import React from 'react';
 import { StyleSheet, View, Text, Button } from 'react-native';
-import { CommonActions, StackActions  } from '@react-navigation/native';
 
-const MyMenuScreen = ({ fetchFacebookData }) => {
-  console.log(fetchFacebookData);
+const MyMenuScreen = () => {
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <View>
       <Text>dasdfasfdasdfasf</Text>
     </View>
   );

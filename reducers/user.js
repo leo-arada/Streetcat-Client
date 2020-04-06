@@ -13,16 +13,16 @@ const user = (state = initialState, action) => {
       return {
         ...state,
         ...action.data.user,
-      }
+      };
     case LOCATION_SUCCESS:
       return {
         ...state,
         location: action.location,
-      }
+      };
     default:
       return {
         ...state,
-      }
+      };
   }
 };
 

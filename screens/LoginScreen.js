@@ -1,19 +1,12 @@
 import React from 'react';
-import { StyleSheet, View, Text, Button } from 'react-native';
-import { CommonActions, StackActions  } from '@react-navigation/native';
+import { StyleSheet, View, Button } from 'react-native';
+
 
 const LogInScreen = ({ fetchFacebookData }) => {
-  console.log(fetchFacebookData);
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      {/* { location ? (
-        <Button 
-         title="google login"
-         onPress={logIn}     
-       />
-      ) :alert('asdfsdfasdf')} */}
       <Button 
-         title="google login"
+         title="Facebook login"
          onPress={fetchFacebookData}     
        />   
     </View>

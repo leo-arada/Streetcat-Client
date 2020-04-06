@@ -1,10 +1,10 @@
-import { LOG_IN_SUCCESS, ERROR, FETCH_DEFAULT_CAT_DATA } from '../constants/index'
+import { LOG_IN_SUCCESS, FETCH_DEFAULT_CAT_DATA } from '../constants/index'
 import { getDistance } from 'geolib';
 
 const initialState = {
   catLists: null,
   catsAroud: [],
-}
+};
 
 const cat = (state = initialState, action) => {
   switch(action.type) {
@@ -13,7 +13,7 @@ const cat = (state = initialState, action) => {
       return {
         ...state,
         catLists: cats,
-      }
+      };
     case FETCH_DEFAULT_CAT_DATA:
       const { catLists } = state;
       const { latitude, longitude } = action.location;
@@ -30,11 +30,11 @@ const cat = (state = initialState, action) => {
       return {
         ...state,
         catsAroud,
-      }
+      };
     default:
       return {
         ...state,
-      }
+      };
   }
 };
 

@@ -3,7 +3,7 @@ import { StyleSheet, View, Text } from 'react-native';
 
 const CatScreen = () => {
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <View>
       <Text>CatScreen Screen</Text>
     </View>
   );

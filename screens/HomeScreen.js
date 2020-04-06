@@ -1,9 +1,9 @@
 import React from 'react';
-import { StyleSheet, View, Text, Button, Dimensions, Image } from 'react-native';
+import { StyleSheet, View, Text, Dimensions, Image } from 'react-native';
 import MapView, { PROVIDER_GOOGLE, Marker, Callout, Circle } from 'react-native-maps';
 
 const HomeScreen = ({ location, nearCat, onPresshandler, navigation }) => {
-  console.log(location, 4444)
+
   return (
     <View style={styles.container}>
       <MapView
@@ -22,7 +22,6 @@ const HomeScreen = ({ location, nearCat, onPresshandler, navigation }) => {
           radius = {500}
           fillColor={'rgba(200, 300, 200, 0.5)'}
         />
-
         <Marker
           coordinate={{ latitude: location.latitude, longitude: location.longitude }}
         >
@@ -39,11 +38,12 @@ const HomeScreen = ({ location, nearCat, onPresshandler, navigation }) => {
         {nearCat.map((cat, i) => (
           <Marker
             key={i}
-            // style={{ width: '100%'}}
-            coordinate={{ latitude: Number(cat.location[0]), longitude: Number(cat.location[1]) }}
+            coordinate={{ 
+              latitude: Number(cat.location[0]), 
+              longitude: Number(cat.location[1]) 
+            }}
           >
             <View style={styles.markerBox}>
-              {/* <Text style={styles.pinText}>{cat.name}</Text> */}
               <Image
                 style={styles.image}
                 source={{
