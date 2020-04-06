@@ -25,6 +25,7 @@ const LoginContainer = () => {
       if (type === 'success') {
         const fetchedData = await fetch(`https://graph.facebook.com/me?access_token=${token}`);
         const { id, name } = await fetchedData.json();
+        console.log(name, 'idname')
         const response = await fetch(`${SERVER_API}/auth/login`, {
           method: 'post',
           headers: { 'Content-Type': 'application/json' },

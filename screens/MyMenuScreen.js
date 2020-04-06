@@ -4,7 +4,7 @@ import { StyleSheet, View, Text, Button } from 'react-native';
 const MyMenuScreen = () => {
   return (
     <View>
-      <Text>dasdfasfdasdfasf</Text>
+      <Text>Mymenu</Text>
     </View>
   );
 };

@@ -5,7 +5,7 @@ import { Button } from 'react-native';
 
 const HomeStack = createStackNavigator();
 
-function HomeStackScreen() {
+const HomeStackScreen = ({ navigation }) => {
   return (
     <HomeStack.Navigator>
       <HomeStack.Screen 
@@ -26,7 +26,7 @@ function HomeStackScreen() {
           ),
           headerLeft: () => (
             <Button 
-              onPress={() => alert('ddddd')}
+              onPress={() => navigation.openDrawer()}
               title="ss"
               style={{ padding: 40 }}
           />
