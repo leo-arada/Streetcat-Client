@@ -1,7 +1,6 @@
 import React from 'react';
 import { StyleSheet, View, Button } from 'react-native';
 
-
 const LogInScreen = ({ fetchFacebookData }) => {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>

@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, View, Text, Dimensions, Image } from 'react-native';
 import MapView, { PROVIDER_GOOGLE, Marker, Callout, Circle } from 'react-native-maps';
+import CatScreen from './CatScreen';
 
 const HomeScreen = ({ location, nearCat, onPresshandler, navigation }) => {
 
@@ -51,11 +52,10 @@ const HomeScreen = ({ location, nearCat, onPresshandler, navigation }) => {
                 }}
               />
             </View>
-            <Callout>
+            <Callout onPress={() => navigation.push('Cat')}>
               <Text>{cat.name}</Text>
             </Callout>
           </Marker>
-         
         ))}
       </MapView>
     </View>
@@ -87,7 +87,21 @@ const styles = StyleSheet.create({
   image: {
     width: 40,
     height: 40
-  }
+  },
+  callOut: {
+    flex: -1,
+    width: '100%',
+    backgroundColor: 'white',
+    borderRadius: 50,
+    padding: 10,
+    shadowColor: "red",
+    shadowOffset: {
+	    width: 0,
+	    height: 8,
+    },
+    shadowOpacity: 0.46,
+    shadowRadius: 11.14,
+  },
 });
 
 export default HomeScreen;

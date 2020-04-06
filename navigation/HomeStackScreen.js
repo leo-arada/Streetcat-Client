@@ -1,7 +1,10 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import HomeContainer from '../containers/HomeContainer';
+import CatScrren from '../screens/CatScreen';
+import CatContainer from '../containers/CatContainer';
 import { Button } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 
 const HomeStack = createStackNavigator();
 
@@ -18,21 +21,20 @@ const HomeStackScreen = ({ navigation }) => {
           },
           title: '',
           headerRight: () => (
-            <Button 
-              onPress={() => alert('ddddd')}
-              title="+"
-              style={{ padding: 40 }}
+            <Ionicons 
+              name="md-add-circle" size={50}
+              onPress={() => console.log(5555)}
             />
           ),
           headerLeft: () => (
-            <Button 
+            <Ionicons
+              name="md-list-box" size={50}
               onPress={() => navigation.openDrawer()}
-              title="ss"
-              style={{ padding: 40 }}
-          />
+            />
           )
         }} 
       />
+      <HomeStack.Screen name="Cat" component={CatContainer}/>
     </HomeStack.Navigator>
   );
 }
