@@ -5,7 +5,7 @@ import { CheckBox } from 'native-base';
 const Input = (props) => {
   return (
     <CheckBox {...props} style={styles.checkBoxText} />
-  )
+  );
 };
 
 const styles = StyleSheet.create({

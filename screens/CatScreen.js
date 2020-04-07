@@ -1,27 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { TouchableOpacity, StyleSheet, View, Text, TextInput, Button, TouchableWithoutFeedback, Keyboard } from 'react-native';
+import { TouchableOpacity, StyleSheet, View, Text, TextInput, Image, Button, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import { CheckBox } from "native-base";
 import * as ImagePicker from 'expo-image-picker';
 import * as Permissions from 'expo-permissions';
 import Input from '../components/Input';
 import { RNS3 } from 'react-native-aws3';
 
-const CatScreen = () => {
+const CatScreen = ({ pickImage, photo }) => {
   const [name, setName] = useState('');
   const [accessibility, setAccessibility] = useState({ answer: '' });
   const [friendliness, setFriendliness] = useState({ answer: ''});
   const [description, setDescription] = useState('');
-
-  const getPermission = async () => {
-    const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
-    if (status !== 'granted') {
-      alert('We need to get your permision to uplode photos!')
-    }
-  };
-
-  useEffect(() => {
-    getPermission();
-  }, []);
 
   const handleNameInput = (name) => {
     setName(name.replace(/[1-9|$&+,:;=?@#|'<>.^*()%!-]/g, ''));
@@ -33,20 +22,6 @@ const CatScreen = () => {
       }
   };
 
-  const pickImage = async () => {
-    const result = await ImagePicker.launchImageLibraryAsync({
-      aspect: [4, 3],
-      quality: 1,
-    })
-    console.log(result);
-    const file = {
-      uri: result.uri,
-      name: '12312313',
-      type: 'image/png'
-    }
-    console.log(file);
-  };
-  
   const checkValue = ['상', '중', '하'];
 
   return (
@@ -110,6 +85,12 @@ const CatScreen = () => {
               onPress={pickImage}
             />
           </View>
+          {photo.uri && 
+            <Image 
+              source={{ uri: photo.uri }}
+              style={{ width: 200, height: 200 }}
+            />
+          }
         </View>
       </View>
     </TouchableWithoutFeedback>
