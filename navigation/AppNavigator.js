@@ -16,7 +16,7 @@ const AppNavigator = ({ isLoggedIn }) => {
         <Text>Notifications Screen</Text>
       </View>
     );
-  }
+  };
 
   return (
     <NavigationContainer>
@@ -25,7 +25,6 @@ const AppNavigator = ({ isLoggedIn }) => {
           <Drawer.Screen name="Home" component={AppTabs} />
           <Drawer.Screen name="Notifications" component={Notifications} />
         </Drawer.Navigator>
-        // <AppTabs />
       ) : (
         <Stack.Navigator>
           <Stack.Screen name="Login" component={LoginContainer} />

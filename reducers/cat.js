@@ -1,4 +1,4 @@
-import { LOG_IN_SUCCESS, FETCH_DEFAULT_CAT_DATA } from '../constants/index'
+import { LOG_IN_SUCCESS, FETCH_CATS_DATA, UPDATE_CATS_DATA } from '../constants/index'
 import { getDistance } from 'geolib';
 
 const initialState = {
@@ -14,10 +14,10 @@ const cat = (state = initialState, action) => {
         ...state,
         catLists: cats,
       };
-    case FETCH_DEFAULT_CAT_DATA:
-      const { catLists } = state;
+    case FETCH_CATS_DATA:
+     
       const { latitude, longitude } = action.location;
-      console.log(latitude, longitude);
+      let { catLists } = state;
       const catsAroud = catLists.filter((cat) => {
         const distance = getDistance(
           { latitude, longitude },
@@ -31,9 +31,12 @@ const cat = (state = initialState, action) => {
         ...state,
         catsAroud,
       };
+    case UPDATE_CATS_DATA:
+      catLists = action.catLists
     default:
       return {
         ...state,
+        catLists,
       };
   }
 };

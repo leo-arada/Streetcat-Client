@@ -9,13 +9,12 @@ import LoginScreen from '../screens/LoginScreen';
 
 const LoginContainer = () => {
   const dispatch = useDispatch();
-
   const saveLocation = (location) => {
     dispatch(locationSuccess(location));
   };
 
   useFetch(saveLocation);
-
+  
   const fetchFacebookData = async () => {
     try {
       await Facebook.initializeAsync(APP_ID);
@@ -23,9 +22,10 @@ const LoginContainer = () => {
         permissions: ['public_profile'],
       });
       if (type === 'success') {
-        const fetchedData = await fetch(`https://graph.facebook.com/me?access_token=${token}`);
+        const fetchedData = await fetch(
+          `https://graph.facebook.com/me?access_token=${token}`
+        );
         const { id, name } = await fetchedData.json();
-        console.log(name, 'idname')
         const response = await fetch(`${SERVER_API}/auth/login`, {
           method: 'post',
           headers: { 'Content-Type': 'application/json' },
@@ -33,16 +33,14 @@ const LoginContainer = () => {
         });
         const data = await response.json();
         dispatch(logInSuccess(data));
-        saveToken('token', data.token, 'userId', id);
+        saveToken('token', data.token, 'userId', data.user.mongoId);
       } 
     } catch ({ message }) {
       alert(`Facebook Login Error: ${message}`);
     }
   };
 
-  return (
-    <LoginScreen fetchFacebookData={fetchFacebookData}/>
-  )
+  return <LoginScreen fetchFacebookData={fetchFacebookData} />;
 };
 
 export default LoginContainer;

@@ -1,7 +1,8 @@
 export const LOADING = 'LOADING';
 export const POSTER  = 'POSTER';
 export const COMMENTER = 'COMMENTER';
-export const FETCH_DEFAULT_CAT_DATA = 'FETCH_DEFAULT_CAT_DATA';
+export const FETCH_CATS_DATA = 'FETCH_CATS_DATA';
+export const UPDATE_CATS_DATA = 'UPDATA_CATS_DATA';
 export const FETCH_USER_DATA = 'FETCH_USER_DATA';
 export const FETCH_COMMENT_DATA = 'FETCH_COMMENT_DATA';
 export const LIKE_CAT = 'LIKE_CAT';
@@ -16,3 +17,9 @@ export const ADD_NEW_COMMENT = 'ADD_NEW_COMMENT';
 export const REFRESH = 'REFRESH';
 export const ERROR = 'ERROR';
 export const LOCATION_SUCCESS = 'LOCATION_SUCCESS';
+export const regPatterns = {
+  name: /[1-9|$&+,:;=?@#|'<>.^*()%!-]/g,
+  textArea: /^[a-zA-Z0-9[ㄱ-ㅎ|ㅏ-ㅣ|가-힣.,\s]{1,30}$/g,
+};
+
+export const checkboxValues = ['상', '중', '하'];

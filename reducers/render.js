@@ -7,7 +7,7 @@ const initialState = {
 }
 
 const render = (state = initialState, action) => {
-  switch(action.type) {
+  switch (action.type) {
     case LOG_IN_SUCCESS:
       return {
         ...state,

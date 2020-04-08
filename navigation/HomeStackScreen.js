@@ -9,6 +9,7 @@ import { Ionicons } from '@expo/vector-icons';
 const HomeStack = createStackNavigator();
 
 const HomeStackScreen = ({ navigation }) => {
+  console.log(navigation);
   return (
     <HomeStack.Navigator>
       <HomeStack.Screen 
@@ -22,8 +23,9 @@ const HomeStackScreen = ({ navigation }) => {
           title: '',
           headerRight: () => (
             <Ionicons 
-              name="md-add-circle" size={50}
-              onPress={() => console.log(5555)}
+              name="md-add-circle" 
+              size={50}
+              onPress={() => navigation.navigate('Cat')}
             />
           ),
           headerLeft: () => (

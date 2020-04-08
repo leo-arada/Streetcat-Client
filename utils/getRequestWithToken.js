@@ -1,6 +1,6 @@
 import { AsyncStorage } from "react-native";
 
-const getToken = async (api) => {
+const getRequestWithToken = async (api) => {
   const token = await AsyncStorage.getItem('token');
   const response = await fetch(api, {
     method: 'GET',
@@ -9,11 +9,7 @@ const getToken = async (api) => {
     }
   })
 
-  const { result } = await response.json();
-    // if (result !== loggedIn) {
-    ///change login status
-  // }
   return ;
 };
 
-export default getToken;
+export default getRequestWithToken;

@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { StyleSheet, view, TextInput } from 'react-native';
+import React from 'react';
+import { StyleSheet, TextInput } from 'react-native';
 
 const Input = (props) => {
   return (

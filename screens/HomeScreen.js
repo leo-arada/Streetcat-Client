@@ -27,14 +27,14 @@ const HomeScreen = ({ location, nearCat, onPresshandler, navigation }) => {
           coordinate={{ latitude: location.latitude, longitude: location.longitude }}
         >
           <View style={styles.markerBox}>
-              <Text style={styles.pinText}>현재위치</Text>
-              <Image
-                style={styles.image}
-                source={{
-                  uri: "https://cdn1.iconfinder.com/data/icons/social-messaging-ui-color/254000/66-512.png"
-                }}
-              />
-            </View>
+            <Text style={styles.pinText}>현재위치</Text>
+            <Image
+              style={styles.image}
+              source={{
+                uri: "https://cdn1.iconfinder.com/data/icons/social-messaging-ui-color/254000/66-512.png"
+              }}
+            />
+          </View>
         </Marker>
         {nearCat.map((cat, i) => (
           <Marker

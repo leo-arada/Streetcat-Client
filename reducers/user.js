@@ -1,4 +1,4 @@
-import { LOG_IN_SUCCESS, LOCATION_SUCCESS } from '../constants/index'
+import { LOG_IN_SUCCESS, LOCATION_SUCCESS, FETCH_CATS_DATA } from '../constants/index'
 
 const initialState = {
   facebookId: null,
@@ -15,6 +15,11 @@ const user = (state = initialState, action) => {
         ...action.data.user,
       };
     case LOCATION_SUCCESS:
+      return {
+        ...state,
+        location: action.location,
+      };
+    case FETCH_CATS_DATA:
       return {
         ...state,
         location: action.location,
