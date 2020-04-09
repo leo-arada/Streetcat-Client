@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import CatScreen from '../screens/CatScreen';
+import CatRegisterScreen from '../screens/CatRegisterScreen';
 import * as Permissions from 'expo-permissions';
 import * as ImagePicker from 'expo-image-picker';
 import { useSelector, useDispatch } from 'react-redux';
 import { SERVER_API } from 'react-native-dotenv';
 import { AsyncStorage } from "react-native";
-import { catsData, updateCats } from '../actions';
+import { catsData, addAcat } from '../actions';
 
-const CatContainer = () => {
+const CatRegisterContainer = ({ navigation }) => {
   const dispatch = useDispatch();
   const { location } = useSelector((state) => state.user);
   const [photo, setPhoto] = useState({});
@@ -17,7 +17,7 @@ const CatContainer = () => {
       alert('We need to get your permision to uplode photos!');
     }
   };
- 
+
   useEffect(() => {
     getPermission();
   }, []);
@@ -61,18 +61,20 @@ const CatContainer = () => {
     });
   
     const res = await response.json();
-    dispatch(updateCats(res.cats));
+    dispatch(addAcat(res.cat));
     dispatch(catsData({ latitude: location.latitude, longitude: location.longitude }));
+    if (res.message === 'ok') return navigation.navigate('Home');
   };
 
   return (
-    <CatScreen 
+    <CatRegisterScreen 
       sendDataToServer={sendDataToServer} 
       photo={photo} 
       displyPhoto={displyPhoto}
       location={location}
+      navigation={navigation}
     />
   );
 }
 
-export default CatContainer;
+export default CatRegisterContainer;

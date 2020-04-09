@@ -7,7 +7,7 @@ const useFetch = (saveLocation) => {
   const getLocationPermission  = async() => {
      const { status } = await Permissions.askAsync(Permissions.LOCATION);
      if (!status === 'granted') {
-       return 
+       return;
      }
 
      const location = await Location.getCurrentPositionAsync({});

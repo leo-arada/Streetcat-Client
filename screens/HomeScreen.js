@@ -1,9 +1,14 @@
 import React from 'react';
 import { StyleSheet, View, Text, Dimensions, Image } from 'react-native';
 import MapView, { PROVIDER_GOOGLE, Marker, Callout, Circle } from 'react-native-maps';
-import CatScreen from './CatScreen';
 
-const HomeScreen = ({ location, nearCat, onPresshandler, navigation }) => {
+const HomeScreen = ({ location, nearCat, onPresshandler, navigation, getClickedCatData }) => {
+  const callOutClickHandler = (index) => {
+    getClickedCatData(index);
+    navigation.navigate('Detail', {
+      index,
+    });
+  };
 
   return (
     <View style={styles.container}>
@@ -14,8 +19,8 @@ const HomeScreen = ({ location, nearCat, onPresshandler, navigation }) => {
         region={{
           latitude: location.latitude,
           longitude: location.longitude,
-          latitudeDelta: 0.001,
-          longitudeDelta: 0.001,
+          latitudeDelta: 0.011,
+          longitudeDelta: 0.011,
         }}
       > 
         <Circle
@@ -38,7 +43,7 @@ const HomeScreen = ({ location, nearCat, onPresshandler, navigation }) => {
         </Marker>
         {nearCat.map((cat, i) => (
           <Marker
-            key={i}
+            key={cat._id}
             coordinate={{ 
               latitude: Number(cat.location[0]), 
               longitude: Number(cat.location[1]) 
@@ -52,7 +57,7 @@ const HomeScreen = ({ location, nearCat, onPresshandler, navigation }) => {
                 }}
               />
             </View>
-            <Callout onPress={() => navigation.push('Cat')}>
+            <Callout onPress={() => callOutClickHandler(i)}>
               <Text>{cat.name}</Text>
             </Callout>
           </Marker>
@@ -86,7 +91,7 @@ const styles = StyleSheet.create({
   },
   image: {
     width: 40,
-    height: 40
+    height: 40,
   },
   callOut: {
     flex: -1,

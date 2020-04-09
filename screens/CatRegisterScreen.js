@@ -3,23 +3,19 @@ import { StyleSheet, View, Text, Image, Button, TouchableWithoutFeedback, Keyboa
 import { CheckBox } from "native-base";
 import Input from '../components/Input';
 import  { regPatterns, checkboxValues } from '../constants'
-
-const CatScreen = ({ sendDataToServer, photo, displyPhoto, location }) => {
+import handleInput from '../utils/handleInput';
+const CatRegisterScreen = ({ sendDataToServer, photo, displyPhoto, location }) => {
   const [name, setName] = useState('');
   const [accessibility, setAccessibility] = useState({ answer: '' });
   const [friendliness, setFriendliness] = useState({ answer: ''});
   const [description, setDescription] = useState('');
   
-  const handleNameInput = (name) => {
-    setName(name.replace(regPatterns.name, ''));
-  };
-
-  const handleDesccriptionInput = (description) => {
-    setDescription(description.replace(regPatterns.name, ''));
-  };
-  
   const submitHandler = async () => {
+    if(!name) alert('이름을 꼭 입력해 주세요!');
+    if (!accessibility.answer) return alert('접근 난이도를 골라 주세요!');
+    if (!friendliness.answer) return alert('친화력을 골라 주세요!');
     if (!photo.uri) return alert('고양이 사진을 등록해주세요');
+   
     const data = {
       name,
       accessibility: accessibility.answer,
@@ -29,7 +25,7 @@ const CatScreen = ({ sendDataToServer, photo, displyPhoto, location }) => {
     }
    
     sendDataToServer(data, photo);
-  }
+  };
 
   return (
     <TouchableWithoutFeedback onPress={() => {
@@ -42,7 +38,7 @@ const CatScreen = ({ sendDataToServer, photo, displyPhoto, location }) => {
             <Input 
               style={styles.nameInput} 
               maxLength={10}
-              onChangeText={handleNameInput}
+              onChangeText={(e) => handleInput(e, setName)}
               value={name}
             />
             <Text style={styles.header}>접근난이도</Text>
@@ -80,8 +76,8 @@ const CatScreen = ({ sendDataToServer, photo, displyPhoto, location }) => {
             <Text style={styles.header}>특이사항</Text>
             <Input 
               style={styles.descriptionInput} 
-              maxLength={20}
-              onChangeText={handleDesccriptionInput}
+              maxLength={25}
+              onChangeText={(e) => handleInput(e, setDescription)}
               value={description}
             />
             <View style={styles.buttonContainer}>
@@ -93,7 +89,7 @@ const CatScreen = ({ sendDataToServer, photo, displyPhoto, location }) => {
             {photo.uri && 
               <Image 
                 source={{ uri: photo.uri }}
-                style={{ width: 150, height: 150 }}
+                style={styles.imageBox}
               />
             }
           </View>
@@ -136,7 +132,7 @@ const styles = StyleSheet.create({
     fontSize:20,
     fontWeight:"bold",
     color:"#364f6b",
-    marginBottom:10
+    marginBottom:10,
   },
   checkBoxContainer: {
     width:"80%",
@@ -149,6 +145,10 @@ const styles = StyleSheet.create({
   checkBoxText: {
     marginLeft: 38,
   },
+  imageBox: {
+    width: 150,
+    height: 150,
+  }
 });
 
-export default CatScreen;
+export default CatRegisterScreen;

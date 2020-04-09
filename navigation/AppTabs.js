@@ -2,7 +2,7 @@ import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeStackScreen from './HomeStackScreen';
 import { Ionicons } from '@expo/vector-icons';
-import CatContainer from '../containers/CatContainer';
+import CatContainer from '../containers/CatRegisterContainer';
 
 const Tabs = createBottomTabNavigator();
 

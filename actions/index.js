@@ -1,21 +1,41 @@
-import { LOG_IN_SUCCESS, ERROR, LOCATION_SUCCESS, FETCH_CATS_DATA, UPDATE_CATS_DATA } from '../constants'
+import { 
+  LOG_IN_SUCCESS, 
+  ERROR, LOCATION_SUCCESS, 
+  FETCH_CATS_DATA, 
+  ADD_CAT_DATA, 
+  CHOSEN_CAT, 
+  UPDATE_CATS_DATA_LIKE,
+  MODIFY_CAT_DATA,
+} from '../constants';
 
 export const logInSuccess = (data) => {
-  return { type: LOG_IN_SUCCESS, data }
+  return { type: LOG_IN_SUCCESS, data };
 };
 
 export const error = (message) => {
-  return { type: ERROR, message }
+  return { type: ERROR, message };
 };
 
 export const locationSuccess = (location) => {
-  return { type: LOCATION_SUCCESS, location }
+  return { type: LOCATION_SUCCESS, location };
 };
 
 export const catsData = (location) => {
-  return { type: FETCH_CATS_DATA, location }
+  return { type: FETCH_CATS_DATA, location };
 };
 
-export const updateCats = (catLists) => {
-  return { type: UPDATE_CATS_DATA, catLists }
+export const addAcat = (newCat) => {
+  return { type: ADD_CAT_DATA, newCat };
+};
+
+export const clickedCat = (catIndex) => {
+  return { type: CHOSEN_CAT, catIndex };
+};
+
+export const updateAcatForLike = (cat) => {
+  return { type: UPDATE_CATS_DATA_LIKE, cat };
+}
+
+export const modifyAcat = (cat) => {
+  return { type: MODIFY_CAT_DATA, cat };
 };

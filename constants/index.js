@@ -2,11 +2,14 @@ export const LOADING = 'LOADING';
 export const POSTER  = 'POSTER';
 export const COMMENTER = 'COMMENTER';
 export const FETCH_CATS_DATA = 'FETCH_CATS_DATA';
-export const UPDATE_CATS_DATA = 'UPDATA_CATS_DATA';
+export const ADD_CAT_DATA = 'ADD_CAT_DATA';
+export const UPDATE_CATS_DATA_LIKE = 'UPDATE_CATS_DATA_LIKE';
+export const MODIFY_CAT_DATA = 'MODIFY_CAT_DATA';
 export const FETCH_USER_DATA = 'FETCH_USER_DATA';
 export const FETCH_COMMENT_DATA = 'FETCH_COMMENT_DATA';
 export const LIKE_CAT = 'LIKE_CAT';
 export const MODIFY_CAT = 'MODIFY_CAT';
+export const SAVE_CURRENT_CAT_INDEX = 'SAVE_CURRENT_CAT_INDEX';
 export const DELETE_CAT = 'DELETE_CAT';
 export const LOG_IN = 'LOG_IN';
 export const LOG_IN_SUCCESS = 'LOG_IN_SUCCESS';
@@ -23,3 +26,5 @@ export const regPatterns = {
 };
 
 export const checkboxValues = ['상', '중', '하'];
+export const actionSheetValue = ['상', '중', '하', '취소'];
+export const CHOSEN_CAT = 'CHOSEN_CAT';

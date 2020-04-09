@@ -27,7 +27,7 @@ const LoginContainer = () => {
         );
         const { id, name } = await fetchedData.json();
         const response = await fetch(`${SERVER_API}/auth/login`, {
-          method: 'post',
+          method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ facebookId: id, name }),
         });

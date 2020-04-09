@@ -1,15 +1,15 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import HomeContainer from '../containers/HomeContainer';
-import CatScrren from '../screens/CatScreen';
-import CatContainer from '../containers/CatContainer';
+import CatRegisterContainer from '../containers/CatRegisterContainer';
+import CatPageContainer from '../containers/CatPageContainer';
 import { Button } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
 const HomeStack = createStackNavigator();
 
 const HomeStackScreen = ({ navigation }) => {
-  console.log(navigation);
+
   return (
     <HomeStack.Navigator>
       <HomeStack.Screen 
@@ -25,7 +25,7 @@ const HomeStackScreen = ({ navigation }) => {
             <Ionicons 
               name="md-add-circle" 
               size={50}
-              onPress={() => navigation.navigate('Cat')}
+              onPress={() => navigation.navigate('Register')}
             />
           ),
           headerLeft: () => (
@@ -33,10 +33,11 @@ const HomeStackScreen = ({ navigation }) => {
               name="md-list-box" size={50}
               onPress={() => navigation.openDrawer()}
             />
-          )
+          ),
         }} 
       />
-      <HomeStack.Screen name="Cat" component={CatContainer}/>
+      <HomeStack.Screen name="Register" component={CatRegisterContainer}/>
+      <HomeStack.Screen name="Detail" component={CatPageContainer} options= {{ headerShown: false }}/>
     </HomeStack.Navigator>
   );
 }
