@@ -5,7 +5,7 @@ const initialState = {
   name: null,
   location: null,
   cats: null,
-}
+};
 
 const user = (state = initialState, action) => {
   switch(action.type) {

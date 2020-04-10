@@ -5,9 +5,7 @@ const StarcatContainer = () => {
   return (
     <View>
       <Text>starcat 보여주자</Text>
-      <Button 
-        title="star"
-      />
+      <Button title="star" />
     </View>
   );
 };

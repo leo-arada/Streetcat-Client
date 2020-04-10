@@ -4,7 +4,8 @@ import {
   ADD_CAT_DATA, 
   CHOSEN_CAT, 
   UPDATE_CATS_DATA_LIKE, 
-  MODIFY_CAT_DATA 
+  MODIFY_CAT_DATA,
+  DELETE_CAT,
 } from '../constants/index';
 import { getDistance } from 'geolib';
 
@@ -50,13 +51,11 @@ const cat = (state = initialState, action) => {
       let { cat } = action;
       catLists = state.catLists;
       let newLists = catLists.filter((eachCat)=> eachCat._id !== cat._id);
-
       return {
         ...state,
         catLists: [...newLists, cat],
         currentCat: cat,
       };
-
     case MODIFY_CAT_DATA:
       cat = action.cat;
       catLists = state.catLists;
@@ -68,7 +67,18 @@ const cat = (state = initialState, action) => {
         catsAround: [...catsAround.filter((eachCat)=> eachCat._id !== cat._id), cat],
         currentCat: cat,
       }
-
+    case DELETE_CAT:
+      cat = action.cat;
+      catLists = state.catLists;
+      catsAround = state.catsAround;
+      newLists = catLists.filter((eachCat)=> eachCat._id !== cat._id);
+      return {
+        ...state,
+        catLists: [...newLists],
+        catsAround: [...catsAround.filter((eachCat)=> eachCat._id !== cat._id)],
+        currentCat: null,
+        catIndex: null,
+      };
     case CHOSEN_CAT:
       const { catIndex } = action;
       const currentCat = state.catsAround[catIndex];

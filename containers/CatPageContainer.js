@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import CatpageScreen from '../screens/CatPageScreen';
-import { modifyAcat, updateAcatForLike, catsData } from '../actions';
+import { modifyAcat, updateAcatForLike, catsData, deleteAcat } from '../actions';
 import { SERVER_API } from 'react-native-dotenv';
 import { AsyncStorage } from "react-native";
 import likePostRequest from '../utils/likePostRequest';
@@ -15,7 +15,9 @@ const CatPageContainer = ({ route , navigation }) => {
   const [isFounder, setIsFounder] = useState(false);
 
   useEffect(() => {
-    setIsFounder(mongoId === cat.founder);
+    if (cat) {
+      setIsFounder(mongoId === cat.founder);
+    }
   }, [cat]);
 
   const snedModifiedData = async (updatedata, catId) => {
@@ -45,38 +47,49 @@ const CatPageContainer = ({ route , navigation }) => {
 
   const sendDeleteRequest = async () => {
     const helper = async () => {
-      const { _id } = cat;
+      const { _id, founder } = cat;
       const token = await AsyncStorage.getItem('token');
       const response = await fetch(`${SERVER_API}/cat/${_id}`,{
         method: 'DELETE',
-        body: JSON.stringify({ _id }),
+        body: JSON.stringify({ _id, founder }),
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json',
         },  
       });
+      const res = await response.json();
+      if (res.result === 'ok') {
+        dispatch(deleteAcat(res.cat));
+        navigation.navigate('Home');
+      } else {
+        console.log('error')
+      }
     };
     
     Alert.alert(
       '삭제',
       '정말 삭제하시겠습니까?',
       [
-        {text: '네', onPress:() => helper()},
-        {text: '취소'}
+        { text: '네', onPress:() => helper() },
+        { text: '취소' }
       ],
     );
   };
 
-  return(
-    <CatpageScreen 
-      cat={cat} 
-      navigation={navigation} 
-      isFounder={isFounder}
-      snedModifiedData={snedModifiedData}
-      sendLikePostRequest={sendLikePostRequest}
-      sendDeleteRequest={sendDeleteRequest}
-    />
-  );
+  if (cat) {
+    return (
+      <CatpageScreen 
+        cat={cat} 
+        navigation={navigation} 
+        isFounder={isFounder}
+        snedModifiedData={snedModifiedData}
+        sendLikePostRequest={sendLikePostRequest}
+        sendDeleteRequest={sendDeleteRequest}
+      />
+    ); 
+  }
+
+  return null;
 };
 
 export default CatPageContainer;

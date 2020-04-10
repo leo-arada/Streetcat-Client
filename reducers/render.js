@@ -4,7 +4,7 @@ const initialState = {
   isLoggedIn: false,
   isLoading: false,
   isError: false,
-}
+};
 
 const render = (state = initialState, action) => {
   switch (action.type) {

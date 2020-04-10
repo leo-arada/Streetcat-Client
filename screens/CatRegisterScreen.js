@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { StyleSheet, View, Text, Image, Button, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import { CheckBox } from "native-base";
 import Input from '../components/Input';
-import  { regPatterns, checkboxValues } from '../constants'
+import  { checkboxValues } from '../constants'
 import handleInput from '../utils/handleInput';
 const CatRegisterScreen = ({ sendDataToServer, photo, displyPhoto, location }) => {
   const [name, setName] = useState('');

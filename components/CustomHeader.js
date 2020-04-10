@@ -1,10 +1,9 @@
 import React from 'react';
-import { View, Text, StyleSheet, Alert } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { Button } from 'native-base';
 
-const CustomHeader = ({ navigation, isFounder, setIsModifying, isDeleting, setIsDeleting, sendDeleteRequest }) => {
-  
+const CustomHeader = ({ navigation, isFounder, setIsModifying, sendDeleteRequest }) => {
   return (
     <View style={styles.header}>
       <View style={styles.left}>

@@ -1,10 +1,10 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, View, Text, Dimensions, TouchableOpacity, Image, ScrollView  } from 'react-native';
 import CustomHeader from '../components/CustomHeader';
 import Input from '../components/Input';
 import handleInput from '../utils/handleInput';
 import  { actionSheetValue } from '../constants'
-import { Container, Header, Content, Icon, Button, ActionSheet } from 'native-base';
+import { Icon, Button } from 'native-base';
 import ActionSheetButton from '../components/ActionSheetButton';
 
 const CatPageScreen = ({ 
@@ -20,8 +20,8 @@ const CatPageScreen = ({
   const [accessibility, setAccessibility] = useState({ clicked: cat.accessibility });
   const [friendliness, setFriendliness] = useState({ clicked: cat.friendliness });
   const [description, setDescription] = useState(cat.description);
-  const [name, setName] = useState(cat.name)
-  
+  const [name, setName] = useState(cat.name);
+
   const updateHandler = async () => {
     if(accessibility.clicked === '취소') {
       return alert('난이도를 골라주세요');
