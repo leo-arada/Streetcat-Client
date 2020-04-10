@@ -3,7 +3,6 @@ import { Button, ActionSheet } from 'native-base';
 import { StyleSheet, Text } from 'react-native';
 
 const ActionSheetButton = ({ array, cancelIndex, title, actionFunction }) => {
-
   return (
     <Button
       rounded

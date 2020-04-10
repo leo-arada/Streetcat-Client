@@ -19,6 +19,15 @@ const HomeContainer = ({ navigation }) => {
   const getClickedCatData = (index) => {
     dispatch(clickedCat(index));
   };
+  const refreshData = () => {
+    getRequestWithToken(`${SERVER_API}/cat`);
+    dispatch(
+      catsData({ 
+        latitude: newLocation.latitude, 
+        longitude: newLocation.longitude,
+      })
+    );
+  };
 
   useEffect(() => {
     getRequestWithToken(`${SERVER_API}/cat`);

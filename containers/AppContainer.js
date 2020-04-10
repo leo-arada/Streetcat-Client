@@ -5,12 +5,12 @@ import AppNavigator from '../navigation/AppNavigator';
 
 const AppContainer = () => {
   const { isLoggedIn } = useSelector((state) => state.render);
-  
   return (
     <Root>
       <AppNavigator isLoggedIn={isLoggedIn} />
     </Root>
   );
+
 };
 
 export default AppContainer;

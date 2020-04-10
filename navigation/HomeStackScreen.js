@@ -3,7 +3,6 @@ import { createStackNavigator } from '@react-navigation/stack';
 import HomeContainer from '../containers/HomeContainer';
 import CatRegisterContainer from '../containers/CatRegisterContainer';
 import CatPageContainer from '../containers/CatPageContainer';
-import { Button } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
 const HomeStack = createStackNavigator();
@@ -40,6 +39,6 @@ const HomeStackScreen = ({ navigation }) => {
       <HomeStack.Screen name="Detail" component={CatPageContainer} options= {{ headerShown: false }}/>
     </HomeStack.Navigator>
   );
-}
+};
 
 export default HomeStackScreen;

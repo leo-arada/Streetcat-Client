@@ -14,6 +14,10 @@ const likePostRequest = async (catId) => {
   });
 
   const result  = await response.json();
+    if (result.message === 'User already liked it') {
+      return { cat: null, message: result.message };
+  }
+
   return result;
 };
 

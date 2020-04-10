@@ -2,7 +2,7 @@ import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeStackScreen from './HomeStackScreen';
 import { Ionicons } from '@expo/vector-icons';
-import CatContainer from '../containers/CatRegisterContainer';
+import starcatStackScreen from './StarcatStackScreen';
 
 const Tabs = createBottomTabNavigator();
 
@@ -23,7 +23,7 @@ const AppTabs = () => {
       })}
     >
       <Tabs.Screen name="Home" component={HomeStackScreen} />
-      <Tabs.Screen name="Starcats" component={CatContainer} />
+      <Tabs.Screen name="Starcats" component={starcatStackScreen} />
     </Tabs.Navigator>
   );
 };

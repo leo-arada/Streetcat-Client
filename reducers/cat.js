@@ -27,7 +27,6 @@ const cat = (state = initialState, action) => {
     case FETCH_CATS_DATA:
       const { latitude, longitude } = action.location;
       let { catLists } = state;
-
       let catsAround = catLists.filter((cat) => {
         const distance = getDistance(
           { latitude, longitude },
@@ -66,7 +65,7 @@ const cat = (state = initialState, action) => {
         catLists: [...newLists, cat],
         catsAround: [...catsAround.filter((eachCat)=> eachCat._id !== cat._id), cat],
         currentCat: cat,
-      }
+      };
     case DELETE_CAT:
       cat = action.cat;
       catLists = state.catLists;

@@ -8,12 +8,20 @@ import likePostRequest from '../utils/likePostRequest';
 import { Alert } from 'react-native';
 
 const CatPageContainer = ({ route , navigation }) => {
+  const { location } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const { index } = route.params;
   const { mongoId } = useSelector((state) => state.user);
-  const cat = useSelector((state) => state.cat.catsAround[index]);
-  const [isFounder, setIsFounder] = useState(false);
+  const cat = useSelector((state) => {
+    if (index.length > 10) {
+      const { catLists } = state.cat;
+      return catLists.find((cat) => cat._id === index);
+    }
 
+    return state.cat.catsAround[index];
+  });
+  const [isFounder, setIsFounder] = useState(false);
+  console.log(location, '로케이션보자보자')
   useEffect(() => {
     if (cat) {
       setIsFounder(mongoId === cat.founder);

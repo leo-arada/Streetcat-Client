@@ -13,6 +13,7 @@
     "@react-navigation/drawer": "^5.4.0",
     "@react-navigation/native": "^5.1.4",
     "@react-navigation/stack": "^5.2.9",
+    "@use-expo/font": "^2.0.0",
     "axios": "^0.19.2",
     "busboy": "^0.3.1",
     "busboy-body-parser": "^0.3.2",
@@ -36,7 +37,8 @@
     "react-native-screens": "2.0.0-alpha.12",
     "react-native-web": "~0.11.7",
     "react-redux": "^7.2.0",
-    "redux": "^4.0.5"
+    "redux": "^4.0.5",
+    "expo-font": "~8.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",

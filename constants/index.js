@@ -28,3 +28,4 @@ export const regPatterns = {
 export const checkboxValues = ['상', '중', '하'];
 export const actionSheetValue = ['상', '중', '하', '취소'];
 export const CHOSEN_CAT = 'CHOSEN_CAT';
+export const HEADER_IMAGE = 'https://cdn.pixabay.com/photo/2016/10/11/18/17/black-cat-1732366_1280.png';
