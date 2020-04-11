@@ -5,7 +5,7 @@ const List = ({ cat, navigation }) => {
   return (
     <TouchableOpacity 
       onPress={() => 
-        navigation.navigate('StarDetail', {
+        navigation.navigate('Detail', {
           index: cat._id,
         })
       }

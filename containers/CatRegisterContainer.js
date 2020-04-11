@@ -5,12 +5,13 @@ import * as ImagePicker from 'expo-image-picker';
 import { useSelector, useDispatch } from 'react-redux';
 import { SERVER_API } from 'react-native-dotenv';
 import { AsyncStorage } from "react-native";
-import { catsData, addAcat } from '../actions';
+import { catsData, addAcat, updateUserCats } from '../actions';
 
 const CatRegisterContainer = ({ navigation }) => {
   const dispatch = useDispatch();
   const { location } = useSelector((state) => state.user);
   const [photo, setPhoto] = useState({});
+
   const getPermission = async () => {
     const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
     if (status !== 'granted') {
@@ -62,7 +63,9 @@ const CatRegisterContainer = ({ navigation }) => {
   
     const res = await response.json();
     dispatch(addAcat(res.cat));
+    dispatch(updateUserCats(res.user.cats));
     dispatch(catsData({ latitude: location.latitude, longitude: location.longitude }));
+    
     if (res.message === 'ok') return navigation.navigate('Home');
   };
 

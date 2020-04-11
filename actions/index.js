@@ -7,6 +7,7 @@ import {
   UPDATE_CATS_DATA_LIKE,
   MODIFY_CAT_DATA,
   DELETE_CAT,
+  UPDATE_USER_CATS,
 } from '../constants';
 
 export const logInSuccess = (data) => {
@@ -43,4 +44,8 @@ export const modifyAcat = (cat) => {
 
 export const deleteAcat = (cat) => {
   return { type: DELETE_CAT, cat };
+};
+
+export const updateUserCats = (cats) => {
+  return { type: UPDATE_USER_CATS, cats} ;
 };

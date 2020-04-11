@@ -10,7 +10,7 @@ const StarcatContainer = ({ navigation }) => {
       .sort((a, b) => b.likes.length - a.likes.length)
       .slice(0, 10);
   };
-  
+
   const popularCats = getPopularCats(catLists);
   return <StarCatsScreen popularCats={popularCats} navigation={navigation} />;
 };

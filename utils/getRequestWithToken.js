@@ -9,8 +9,8 @@ const getRequestWithToken = async (api) => {
     }
   });
 
-  const { result } = await response.json();
-  return ;
+  const res = await response.json();
+  return res;
 };
 
 export default getRequestWithToken;

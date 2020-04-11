@@ -10,7 +10,7 @@ import {
 import { getDistance } from 'geolib';
 
 const initialState = {
-  catLists: null,
+  catLists: [],
   catsAround: [],
   currentCat: null,
   catIndex: null,
@@ -89,7 +89,6 @@ const cat = (state = initialState, action) => {
     default:
       return {
         ...state,
-        catLists,
       };
   }
 };

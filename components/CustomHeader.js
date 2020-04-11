@@ -1,17 +1,13 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
 import { Button } from 'native-base';
+import BackButton from '../components/BackButton';
 
 const CustomHeader = ({ navigation, isFounder, setIsModifying, sendDeleteRequest }) => {
   return (
     <View style={styles.header}>
       <View style={styles.left}>
-        <Ionicons
-          name="md-arrow-back"
-          size={30}
-          onPress={() => navigation.goBack()}
-        />
+        <BackButton navigation={navigation} />
       </View>
       <View style={styles.right}>
       {isFounder && (

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import CatpageScreen from '../screens/CatPageScreen';
-import { modifyAcat, updateAcatForLike, catsData, deleteAcat } from '../actions';
+import { modifyAcat, updateAcatForLike, catsData, deleteAcat, updateUserCats } from '../actions';
 import { SERVER_API } from 'react-native-dotenv';
 import { AsyncStorage } from "react-native";
 import likePostRequest from '../utils/likePostRequest';
@@ -21,7 +21,7 @@ const CatPageContainer = ({ route , navigation }) => {
     return state.cat.catsAround[index];
   });
   const [isFounder, setIsFounder] = useState(false);
-  console.log(location, '로케이션보자보자')
+
   useEffect(() => {
     if (cat) {
       setIsFounder(mongoId === cat.founder);
@@ -68,6 +68,7 @@ const CatPageContainer = ({ route , navigation }) => {
       const res = await response.json();
       if (res.result === 'ok') {
         dispatch(deleteAcat(res.cat));
+        dispatch(updateUserCats(res.cats));
         navigation.navigate('Home');
       } else {
         console.log('error')
