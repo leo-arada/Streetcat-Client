@@ -3,6 +3,7 @@ import { StyleSheet, View, Text, Dimensions, Image } from 'react-native';
 import MapView, { PROVIDER_GOOGLE, Marker, Callout, Circle } from 'react-native-maps';
 
 const HomeScreen = ({ location, nearCat, onPresshandler, navigation, getClickedCatData }) => {
+
   const callOutClickHandler = (index) => {
     getClickedCatData(index);
     navigation.navigate('Detail', {
@@ -43,7 +44,7 @@ const HomeScreen = ({ location, nearCat, onPresshandler, navigation, getClickedC
         </Marker>
         {nearCat.map((cat, i) => (
           <Marker
-            key={cat._id}
+            key={cat._id + Math.random()}
             coordinate={{ 
               latitude: Number(cat.location[0]), 
               longitude: Number(cat.location[1]) 

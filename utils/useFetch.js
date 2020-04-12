@@ -10,10 +10,10 @@ const useFetch = (saveLocation) => {
        return;
      }
 
-     const location = await Location.getCurrentPositionAsync({});
-     const { latitude, longitude } = location.coords;
-     setLocation(location);
-     saveLocation({ latitude, longitude});
+    const location = await Location.getCurrentPositionAsync({});
+    const { latitude, longitude } = location.coords;
+    setLocation(location);
+    saveLocation({ latitude, longitude});
   };
 
   useEffect(() => {

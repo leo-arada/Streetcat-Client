@@ -15,7 +15,7 @@ const HomeContainer = ({ navigation }) => {
     const { latitude, longitude } = e.nativeEvent.coordinate;
     setNewLocaiton({ latitude, longitude });
   };
- 
+
   const getClickedCatData = (index) => {
     dispatch(clickedCat(index));
   };

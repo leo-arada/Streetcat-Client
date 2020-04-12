@@ -5,7 +5,7 @@ import * as ImagePicker from 'expo-image-picker';
 import { useSelector, useDispatch } from 'react-redux';
 import { SERVER_API } from 'react-native-dotenv';
 import { AsyncStorage } from "react-native";
-import { catsData, addAcat, updateUserCats } from '../actions';
+import { catsData, addAcat } from '../actions';
 
 const CatRegisterContainer = ({ navigation }) => {
   const dispatch = useDispatch();
@@ -63,7 +63,6 @@ const CatRegisterContainer = ({ navigation }) => {
   
     const res = await response.json();
     dispatch(addAcat(res.cat));
-    dispatch(updateUserCats(res.user.cats));
     dispatch(catsData({ latitude: location.latitude, longitude: location.longitude }));
     
     if (res.message === 'ok') return navigation.navigate('Home');

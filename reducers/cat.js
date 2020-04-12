@@ -6,6 +6,7 @@ import {
   UPDATE_CATS_DATA_LIKE, 
   MODIFY_CAT_DATA,
   DELETE_CAT,
+  UPDATE_CATS_DATA_COMMENT,
 } from '../constants/index';
 import { getDistance } from 'geolib';
 
@@ -47,6 +48,7 @@ const cat = (state = initialState, action) => {
         catLists: [...state.catLists, newCat],
       };
     case UPDATE_CATS_DATA_LIKE:
+    case UPDATE_CATS_DATA_COMMENT:
       let { cat } = action;
       catLists = state.catLists;
       let newLists = catLists.filter((eachCat)=> eachCat._id !== cat._id);

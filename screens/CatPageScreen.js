@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Text, Dimensions, TouchableOpacity, Image, ScrollView  } from 'react-native';
+import { StyleSheet, View, Text, Dimensions, TouchableOpacity, Image, ScrollView, SafeAreaView  } from 'react-native';
 import CustomHeader from '../components/CustomHeader';
 import Input from '../components/Input';
 import handleInput from '../utils/handleInput';
 import  { actionSheetValue } from '../constants'
 import { Icon, Button } from 'native-base';
 import ActionSheetButton from '../components/ActionSheetButton';
+import Comment from '../components/Comment';
 
 const CatPageScreen = ({ 
   cat, 
@@ -14,16 +15,21 @@ const CatPageScreen = ({
   snedModifiedData, 
   sendLikePostRequest, 
   sendDeleteRequest,
+  userId,
+  comments,
+  postRequesAddComment,
+  deleteComment,
 }) => {
   const [isModyfing, setIsModifying] = useState(false);
-  const [isDeleting, setIsDeleting]  = useState(false);
   const [accessibility, setAccessibility] = useState({ clicked: cat.accessibility });
   const [friendliness, setFriendliness] = useState({ clicked: cat.friendliness });
   const [description, setDescription] = useState(cat.description);
   const [name, setName] = useState(cat.name);
 
   const updateHandler = async () => {
-    if(accessibility.clicked === '취소') {
+    if (!name) {
+      return alert('이름을 입력해주세요');
+    }else if(accessibility.clicked === '취소') {
       return alert('난이도를 골라주세요');
     } else if (friendliness.clicked === '취소') {
       return alert('친화력을 골라주세요');
@@ -49,8 +55,6 @@ const CatPageScreen = ({
           navigation={navigation} 
           isFounder={isFounder}
           setIsModifying={setIsModifying}
-          isDeleting={isDeleting}
-          setIsDeleting={setIsDeleting}
         />
         <View style={styles.inputContainer}>
           <Image
@@ -117,7 +121,14 @@ const CatPageScreen = ({
             <Text style={{ padding: 20 }}>저장</Text>
           </Button>
         </View>
-      } 
+      }
+      <Comment 
+        cat={cat} 
+        userId={userId} 
+        comments={comments} 
+        postRequesAddComment={postRequesAddComment}
+        deleteComment={deleteComment}
+      />
     </ScrollView>
   );
 };

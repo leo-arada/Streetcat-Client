@@ -7,7 +7,10 @@ import {
   UPDATE_CATS_DATA_LIKE,
   MODIFY_CAT_DATA,
   DELETE_CAT,
-  UPDATE_USER_CATS,
+  UPDATE_CATS_DATA_COMMENT,
+  ADD_COMMENT,
+  GET_COMMENTS,
+  DELETE_COMMENT,
 } from '../constants';
 
 export const logInSuccess = (data) => {
@@ -46,6 +49,18 @@ export const deleteAcat = (cat) => {
   return { type: DELETE_CAT, cat };
 };
 
-export const updateUserCats = (cats) => {
-  return { type: UPDATE_USER_CATS, cats} ;
+export const updateCatsComment = (cat) => {
+  return { type: UPDATE_CATS_DATA_COMMENT, cat } ;
+};
+
+export const getComments = (comments) => {
+  return { type: GET_COMMENTS, comments }
+};
+
+export const addAcomment = (comment) => {
+  return { type: ADD_COMMENT, comment };
+};
+
+export const deleteAcomment = (comment) => {
+  return { type: DELETE_COMMENT, comment };
 };
