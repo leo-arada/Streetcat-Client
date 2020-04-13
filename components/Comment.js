@@ -1,12 +1,20 @@
-import React, { useState } from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
+import React, { useState, useRef } from 'react';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, Alert } from 'react-native';
 import CommentList from './CommentList';
 
 const Comment = ({ cat, userId, comments, postRequesAddComment, deleteComment }) => {
   const [comment, setComment] = useState('');
-
-  const inputHandler= (value) => {
+  const hasPosted = useRef(false);
+  const inputHandler = (value) => {
     setComment(value);
+  };
+
+  const addAComment = async (comment) => {
+    if (!comment) return Alert.alert('코멘트 내용을 입력해주세요!!');
+    if (hasPosted.current) return;
+    hasPosted.current = true;
+    await postRequesAddComment(comment);
+    hasPosted.current = false;
   };
 
   return (
@@ -31,7 +39,7 @@ const Comment = ({ cat, userId, comments, postRequesAddComment, deleteComment })
           placeholder='코멘트를 입력해주세요' 
         />
         <TouchableOpacity
-          onPress={() => postRequesAddComment(comment)}
+          onPress={() => addAComment(comment)}
         >
           <Text style={styles.postText}>POST</Text>
         </TouchableOpacity>

@@ -16,10 +16,11 @@ import likePostRequest from '../utils/likePostRequest';
 import getRequestWithToken from '../utils/getRequestWithToken';
 import createOptionalAlert from '../utils/createOptionalAlert';
 import { DELETE_ALERT } from '../constants'
+import { Alert } from 'react-native';
 
 const CatPageContainer = ({ route, navigation }) => {
   const dispatch = useDispatch();
-  const { location } = useSelector((state) => state.user);
+  const [isFounder, setIsFounder] = useState(false);
   const { comments } = useSelector((state) => state.comment);
   const { index } = route.params;
   const { user } = useSelector((state) => state);
@@ -32,86 +33,111 @@ const CatPageContainer = ({ route, navigation }) => {
 
     return state.cat.catsAround[index];
   });
-  const [isFounder, setIsFounder] = useState(false);
 
   const getRequestForComments = async (id) => {
-    const { result, comments } = await getRequestWithToken(
-      `${SERVER_API}/cat/${id}/comment`
-    );
-    dispatch(getComments(comments));
+    try {
+      const { result, comments } = await getRequestWithToken(
+        `${SERVER_API}/cat/${id}/comment`
+      );
+
+      if (result !== 'ok') return Alert.alert('코멘트 정보를 가져오는데 실패했습니다.');
+      dispatch(getComments(comments));
+    } catch (error) {
+      Alert.alert('코멘트 정보를 가져오는데 실패했습니다.');
+    }
   };
 
   const postRequesAddComment = async (input) => {
-    const token = await AsyncStorage.getItem('token');
-    const { _id } = cat;
-    const response = await fetch(`${SERVER_API}/cat/${cat._id}/comment`, {
-      method: 'POST',
-      body: JSON.stringify({ 
-        id: _id, 
-        writerId: user.mongoId, 
-        content: input, 
-        writerName: user.name 
-      }),
-      headers: {
-        'Authorization': `Bearer ${token}`,
-        'Content-Type': 'application/json',
-      },  
-    });
-
-    const { result, comment } = await response.json();
-    dispatch(addAcomment(comment));
-  };
-
-  useEffect(() => {
-    if (cat) {
-      getRequestForComments(cat._id);
-      setIsFounder(user.mongoId === cat.founder);
-    }
-  }, [cat]);
-
-  const snedModifiedData = async (updatedata, catId) => {
-    const token = await AsyncStorage.getItem('token');
-    const response = await fetch(`${SERVER_API}/cat/${catId}`, {
-      method: 'PUT',
-      body: JSON.stringify(updatedata),
-      headers: {
-        'Authorization': `Bearer ${token}`,
-        'Content-Type': 'application/json',
-      },  
-    });
-
-    const res = await response.json();
-    dispatch(modifyAcat(res.cat));
-    navigation.goBack();
-  };
-
-  const sendLikePostRequest = async (catId) => {
-    const { cat, message } = await likePostRequest(catId);
-    if (message === 'User already liked it') {
-      return;
-    }
-
-    dispatch(updateAcatForLike(cat));
-  };
-
-  const sendDeleteRequest = async () => {
-    const helper = async () => {
-      const { _id, founder } = cat;
+    try {
       const token = await AsyncStorage.getItem('token');
-      const response = await fetch(`${SERVER_API}/cat/${_id}`, {
-        method: 'DELETE',
-        body: JSON.stringify({ _id, founder }),
+      const { _id } = cat;
+      const response = await fetch(`${SERVER_API}/cat/${cat._id}/comment`, {
+        method: 'POST',
+        body: JSON.stringify({ 
+          id: _id, 
+          writerId: user.mongoId, 
+          content: input, 
+          writerName: user.name 
+        }),
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json',
         },  
       });
-      const res = await response.json();
-      if (res.result === 'ok') {
-        dispatch(deleteAcat(res.cat));
-        navigation.navigate('Home');
+      
+      const { result, comment } = await response.json();
+      if (result !== 'ok') return Alert.Alert('코멘트를 추가하는데 실패했습니다. 다시 시도해 주세요.');
+      dispatch(addAcomment(comment));
+    } catch (error) {
+      return Alert.Alert('코멘트를 추가하는데 실패했습니다. 다시 시도해 주세요.');
+    }
+  };
+
+  useEffect(() => {
+    let mounted = true;
+    if (cat) {
+      getRequestForComments(cat._id);
+      setIsFounder(user.mongoId === cat.founder);
+    }
+    
+    return () => mounted = false;
+  }, [cat]);
+
+  const snedModifiedData = async (updatedata, catId) => {
+    try {
+      const token = await AsyncStorage.getItem('token');
+      const response = await fetch(`${SERVER_API}/cat/${catId}`, {
+        method: 'PUT',
+        body: JSON.stringify(updatedata),
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },  
+      });
+  
+      const { cat, message } = await response.json();
+      if (message != 'ok') return Alert.alert('정보를 수정하는데 실패했습니다. 다시 시도해주세요');
+      dispatch(modifyAcat(cat));
+      navigation.goBack();
+    } catch (error) {
+      Alert.alert('정보를 수정하는데 실패했습니다. 다시 시도해주세요');
+    }
+  };
+
+  const sendLikePostRequest = async (catId) => {
+    try {
+      const { cat, result } = await likePostRequest(catId);
+      if (result === 'ok') {
+        dispatch(updateAcatForLike(cat));
+      } else if (result === 'already done') {
+        return;
       } else {
-        console.log('error')
+        Alert.alert('다시 시도해주세요'); 
+      }
+    } catch (error) {
+      Alert.alert('다시 시도해주세요');
+    } 
+  };
+
+  const sendDeleteRequest = () => {
+    const helper = async () => {
+      try {
+        const { _id, founder } = cat;
+        const token = await AsyncStorage.getItem('token');
+        const response = await fetch(`${SERVER_API}/cat/${_id}`, {
+          method: 'DELETE',
+          body: JSON.stringify({ _id, founder }),
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },  
+        });
+        const res = await response.json();
+        if (res.result !== 'ok') return Alert.alert('삭제요청이 실패했습니다. 다시 시도해주세요');
+          dispatch(deleteAcat(res.cat));
+          navigation.navigate('Home');
+      } catch (error) {
+        Alert.alert('삭제요청이 실패했습니다. 다시 시도해주세요');
       }
     };
     
@@ -120,19 +146,24 @@ const CatPageContainer = ({ route, navigation }) => {
 
   const sendDeleteRequestForComment = (commentId) => {
     const helper = async () => {
-      const { _id } = cat;
-      const token = await AsyncStorage.getItem('token');
-      const response = await fetch(`${SERVER_API}/cat/${_id}/comment/${commentId}`, {
-        method: 'DELETE',
-        body: JSON.stringify({ catId: _id, commentId }),
-        headers: {
-          'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json',
-        },  
-      });
-      const { newCat, comment } = await response.json();
-      dispatch(updateCatsComment(newCat));
-      dispatch(deleteAcomment(comment));
+      try {
+        const { _id } = cat;
+        const token = await AsyncStorage.getItem('token');
+        const response = await fetch(`${SERVER_API}/cat/${_id}/comment/${commentId}`, {
+          method: 'DELETE',
+          body: JSON.stringify({ catId: _id, commentId }),
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },  
+        });
+        const { newCat, comment, result } = await response.json();
+        if (result !== 'ok') return Alert.alert('코멘트 삭제가 실패했습니다. 다시 시도해주세요');
+        dispatch(updateCatsComment(newCat));
+        dispatch(deleteAcomment(comment));
+      } catch (error) {
+        Alert.alert('코멘트 삭제가 실패했습니다. 다시 시도해주세요');
+      }
     };
 
     createOptionalAlert(DELETE_ALERT.option1, DELETE_ALERT.option2, helper);

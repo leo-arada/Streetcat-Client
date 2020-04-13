@@ -9,7 +9,7 @@ const MyCatsStackScreen = ({ user, fetchMyCats }) => {
   return (
     <Stack.Navigator>
        <Stack.Screen name="Mycat" options= {{ headerShown: false }}>
-        {props => <MyCatsScreen {...props} user={user} fetchMyCats={fetchMyCats} />} 
+        {(props) => <MyCatsScreen {...props} user={user} fetchMyCats={fetchMyCats} />} 
        </Stack.Screen>
        <Stack.Screen 
         name="myCatDetail" 

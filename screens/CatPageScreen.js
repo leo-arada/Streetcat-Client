@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { StyleSheet, View, Text, Dimensions, TouchableOpacity, Image, ScrollView, SafeAreaView  } from 'react-native';
+import React, { useState, useRef } from 'react';
+import { StyleSheet, View, Text, Dimensions, TouchableOpacity, Image, ScrollView  } from 'react-native';
 import CustomHeader from '../components/CustomHeader';
 import Input from '../components/Input';
 import handleInput from '../utils/handleInput';
@@ -25,8 +25,11 @@ const CatPageScreen = ({
   const [friendliness, setFriendliness] = useState({ clicked: cat.friendliness });
   const [description, setDescription] = useState(cat.description);
   const [name, setName] = useState(cat.name);
+  const hasSubmitted = useRef(false);
 
   const updateHandler = async () => {
+    if(hasSubmitted.current) return;
+
     if (!name) {
       return alert('이름을 입력해주세요');
     }else if(accessibility.clicked === '취소') {
@@ -37,6 +40,8 @@ const CatPageScreen = ({
       return alert('이름을 꼭 입력해 주세요!');
     }
 
+    hasSubmitted.current = true;
+  
     const updatedata = {
       name,
       description,
@@ -45,6 +50,7 @@ const CatPageScreen = ({
     }
 
     snedModifiedData(updatedata, cat._id);
+    hasSubmitted.current = true;
   };
 
   return (
@@ -148,7 +154,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
   },
     imageBox: {
-    width: 300,
+    width: '90%',
     height: 200,
   },
   header: {
@@ -178,7 +184,7 @@ const styles = StyleSheet.create({
     width: '40%',
   },
   descriptionInput: {
-    width: 300,
+    width: '90%',
     fontSize: 15,
   },
   likeButton: {

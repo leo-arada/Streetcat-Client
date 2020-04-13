@@ -1,9 +1,9 @@
 import React from 'react';
 import { StyleSheet, View, Text, Dimensions, Image } from 'react-native';
 import MapView, { PROVIDER_GOOGLE, Marker, Callout, Circle } from 'react-native-maps';
+import { COLOR, MARKER, CAT_MARKER } from '../constants';
 
 const HomeScreen = ({ location, nearCat, onPresshandler, navigation, getClickedCatData }) => {
-
   const callOutClickHandler = (index) => {
     getClickedCatData(index);
     navigation.navigate('Detail', {
@@ -27,7 +27,7 @@ const HomeScreen = ({ location, nearCat, onPresshandler, navigation, getClickedC
         <Circle
           center = {{ latitude: location.latitude, longitude: location.longitude }}
           radius = {500}
-          fillColor={'rgba(200, 300, 200, 0.5)'}
+          fillColor={COLOR.circle}
         />
         <Marker
           coordinate={{ latitude: location.latitude, longitude: location.longitude }}
@@ -37,7 +37,7 @@ const HomeScreen = ({ location, nearCat, onPresshandler, navigation, getClickedC
             <Image
               style={styles.image}
               source={{
-                uri: "https://cdn1.iconfinder.com/data/icons/social-messaging-ui-color/254000/66-512.png"
+                uri: MARKER
               }}
             />
           </View>
@@ -54,7 +54,7 @@ const HomeScreen = ({ location, nearCat, onPresshandler, navigation, getClickedC
               <Image
                 style={styles.image}
                 source={{
-                  uri: "https://cdn.iconscout.com/icon/premium/png-256-thumb/marker-155-684987.png"
+                  uri: CAT_MARKER
                 }}
               />
             </View>
@@ -71,13 +71,12 @@ const HomeScreen = ({ location, nearCat, onPresshandler, navigation, getClickedC
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
   },
   map: {
     width: Dimensions.get('window').width,
-    height: Dimensions.get('window').height,
+    height: Dimensions.get('window').height /1.1,
   },
   markerBox: {
     alignItems: 'center',

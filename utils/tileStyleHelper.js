@@ -1,6 +1,6 @@
 const tileStyleHelper = (array) => {
   if (array.length !== 0  && array.length % 2 !== 0) {
-    array.push({ name: 'black', empty: true })
+    array.push({ name: 'blank', empty: true })
   }
 
   return array;

@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet, Dimensions, Image, ScrollView } from 'react-native';
 import List from '../components/List';
 import { HEADER_IMAGE } from '../constants'
+
 const starCatsScreen = ({ popularCats, navigation }) => {
   return (
     <View style={styles.screen}>
@@ -20,7 +21,7 @@ const starCatsScreen = ({ popularCats, navigation }) => {
       </View>
       <ScrollView style={styles.listContainer}>
         {popularCats.map((cat) => {
-          return <List cat={cat} navigation={navigation}/>;     
+          return <List cat={cat} navigation={navigation} key={cat.id + Math.random().toString()}/>;     
         })}
         <View style={styles.emptyBox}>
         </View>

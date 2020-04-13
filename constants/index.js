@@ -1,26 +1,13 @@
 export const LOADING = 'LOADING';
-export const POSTER  = 'POSTER';
-export const COMMENTER = 'COMMENTER';
 export const FETCH_CATS_DATA = 'FETCH_CATS_DATA';
 export const ADD_CAT_DATA = 'ADD_CAT_DATA';
 export const UPDATE_CATS_DATA_LIKE = 'UPDATE_CATS_DATA_LIKE';
 export const MODIFY_CAT_DATA = 'MODIFY_CAT_DATA';
-export const FETCH_USER_DATA = 'FETCH_USER_DATA';
-export const FETCH_COMMENT_DATA = 'FETCH_COMMENT_DATA';
-export const LIKE_CAT = 'LIKE_CAT';
-export const MODIFY_CAT = 'MODIFY_CAT';
 export const DELETE_CAT = 'DELETE_CAT';
 export const UPDATE_CATS_DATA_COMMENT = 'UPDATE_CATS_DATA_COMMENT';
 export const DELETE_COMMENT = 'DELETE_COMMENT';
-export const SAVE_CURRENT_CAT_INDEX = 'SAVE_CURRENT_CAT_INDEX';
-export const LOG_IN = 'LOG_IN';
 export const LOG_IN_SUCCESS = 'LOG_IN_SUCCESS';
-export const LOG_IN_FAILURE = 'LOG_IN_FAILURE';
 export const LOG_OUT = 'LOG_OUT';
-export const ADD_NEW_CAT = 'ADD_NEW_CAT';
-export const ADD_NEW_COMMENT = 'ADD_NEW_COMMENT';
-export const REFRESH = 'REFRESH';
-export const ERROR = 'ERROR';
 export const LOCATION_SUCCESS = 'LOCATION_SUCCESS';
 export const regPatterns = {
   name: /[1-9|$&+,:;=?@#|'<>.^*()%!-]/g,
@@ -31,6 +18,15 @@ export const checkboxValues = ['상', '중', '하'];
 export const actionSheetValue = ['상', '중', '하', '취소'];
 export const CHOSEN_CAT = 'CHOSEN_CAT';
 export const HEADER_IMAGE = 'https://cdn.pixabay.com/photo/2016/10/11/18/17/black-cat-1732366_1280.png';
+export const MARKER = 'https://cdn1.iconfinder.com/data/icons/social-messaging-ui-color/254000/66-512.png'
+export const CAT_MARKER = 'https://cdn1.iconfinder.com/data/icons/locations-6/48/1-512.png';
 export const ADD_COMMENT = 'ADD_COMMENT';
 export const GET_COMMENTS = 'GET_COMMENTS';
 export const DELETE_ALERT = { option1: '삭제', option2: '정말삭제하시겠습니까' };
+export const COLOR = { 
+  main: '#ff9191', 
+  second: '#C64242', 
+  white: 'white', 
+  transparent: 'transparent',
+  circle: 'rgba(200, 300, 200, 0.5)',
+};

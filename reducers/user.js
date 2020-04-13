@@ -1,4 +1,9 @@
-import { LOG_IN_SUCCESS, LOCATION_SUCCESS, FETCH_CATS_DATA, UPDATE_USER_CATS } from '../constants/index'
+import { 
+  LOG_IN_SUCCESS, 
+  LOCATION_SUCCESS, 
+  FETCH_CATS_DATA, 
+  UPDATE_USER_CATS 
+} from '../constants/index';
 
 const initialState = {
   facebookId: null,

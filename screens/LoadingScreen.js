@@ -3,16 +3,15 @@ import { StyleSheet, View, Text } from 'react-native';
 
 const LoadingScreen = () => {
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <View style={styles.loading}>
      <Text>Loading</Text>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
+  loading: {
     flex: 1,
-    backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
   },

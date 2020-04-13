@@ -1,19 +1,25 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, Dimensions, FlatList,  } from 'react-native';
+import { View, Text, StyleSheet, Dimensions, FlatList, Alert } from 'react-native';
 import BackButton from '../components/BackButton';
 import CoverImageList from '../components/CoverImageList';
 
 const MyCatsScreen = ({ user, fetchMyCats, navigation }) => {
   const [myCats, setMyCats ] = useState([]);
-
+ 
   useEffect(() => {
     const foucsListner = navigation.addListener('focus', async () => {
       const { result, cats } = await fetchMyCats(user.mongoId);
+      console.log(result)
+      if (result !== 'ok') {
+        changeLoadingStatus();
+        return Alert.alert('내가 좋아한 냥이 정보 가져오기가 실패했습니다. 다시 시도해주세요');
+      }
+      
       setMyCats(cats);
     });
  
     return foucsListner;
-  }, []);
+  }, [navigation]);
 
   return (
     <View style={styles.screen}>
@@ -31,6 +37,7 @@ const MyCatsScreen = ({ user, fetchMyCats, navigation }) => {
         renderItem={({ item }) => (
           <CoverImageList cat={item} navigation={navigation} />
         )}
+        keyExtractor= {(item, index) => item._id + index.toString()}
       />
     </View>
   );

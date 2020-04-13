@@ -1,11 +1,14 @@
 import React from 'react';
 import { Root } from 'native-base';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import AppNavigator from '../navigation/AppNavigator';
 import { SERVER_API } from 'react-native-dotenv';
 import getRequestWithToken from '../utils/getRequestWithToken';
+import { logOut } from '../actions'
+import { AsyncStorage } from "react-native";
 
 const AppContainer = () => {
+  const dispatch = useDispatch();
   const { isLoggedIn } = useSelector((state) => state.render);
   const { user } = useSelector((state) => state);
 
@@ -19,13 +22,22 @@ const AppContainer = () => {
     return await getRequestWithToken(api);
   };
 
+  const proceedLogout = async () => {
+    await AsyncStorage.removeItem('token');
+    await AsyncStorage.removeItem('userId');
+    const token = await AsyncStorage.getItem('token');
+    console.log(token);
+    dispatch(logOut());
+  };
+
   return (
     <Root>
       <AppNavigator 
-        isLoggedIn={isLoggedIn} 
+        isLoggedIn={isLoggedIn}
         user={user} 
         fetchMyCats={fetchMyCats} 
         fetchLikedcats={fetchLikedcats}
+        proceedLogout={proceedLogout}
       />
     </Root>
   );

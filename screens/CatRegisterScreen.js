@@ -1,21 +1,33 @@
-import React, { useState } from 'react';
-import { StyleSheet, View, Text, Image, Button, TouchableWithoutFeedback, Keyboard } from 'react-native';
+import React, { useState, useRef } from 'react';
+import { 
+  StyleSheet, 
+  View, 
+  Text, 
+  Image, 
+  Button, 
+  TouchableWithoutFeedback, 
+  Keyboard,
+} from 'react-native';
 import { CheckBox } from "native-base";
 import Input from '../components/Input';
-import  { checkboxValues } from '../constants'
+import  { checkboxValues, COLOR } from '../constants'
 import handleInput from '../utils/handleInput';
+
 const CatRegisterScreen = ({ sendDataToServer, photo, displyPhoto, location }) => {
   const [name, setName] = useState('');
   const [accessibility, setAccessibility] = useState({ answer: '' });
   const [friendliness, setFriendliness] = useState({ answer: ''});
   const [description, setDescription] = useState('');
-  
+  const hasRegistered = useRef(false);
+
   const submitHandler = async () => {
-    if(!name) alert('이름을 꼭 입력해 주세요!');
+    if (hasRegistered.current) return;
+    if (!name) alert('이름을 꼭 입력해 주세요!');
     if (!accessibility.answer) return alert('접근 난이도를 골라 주세요!');
     if (!friendliness.answer) return alert('친화력을 골라 주세요!');
     if (!photo.uri) return alert('고양이 사진을 등록해주세요');
-   
+    
+    hasRegistered.current = true;
     const data = {
       name,
       accessibility: accessibility.answer,
@@ -47,8 +59,8 @@ const CatRegisterScreen = ({ sendDataToServer, photo, displyPhoto, location }) =
                 return (
                   <>
                     <CheckBox
-                      key={i}
-                      color="#fc5185"
+                      key={Math.random().toString() + i + value}
+                      color={COLOR.second}
                       onPress={() => setAccessibility({ answer: value })}
                       checked={accessibility.answer===value}
                     />
@@ -63,8 +75,8 @@ const CatRegisterScreen = ({ sendDataToServer, photo, displyPhoto, location }) =
                 return (
                   <>
                     <CheckBox
-                      key={i} 
-                      color="#fc5185"
+                      key={Math.random().toString() + i + value} 
+                      color={COLOR.second}
                       onPress={() => setFriendliness({ answer: value })}
                       checked={friendliness.answer===value}
                     />
@@ -81,7 +93,8 @@ const CatRegisterScreen = ({ sendDataToServer, photo, displyPhoto, location }) =
               value={description}
             />
             <View style={styles.buttonContainer}>
-              <Button 
+              <Button
+                color={COLOR.main}
                 title="사진업로드"
                 onPress={displyPhoto}
               />
@@ -96,6 +109,7 @@ const CatRegisterScreen = ({ sendDataToServer, photo, displyPhoto, location }) =
         </View>
         <Button
           title="냥이등록"
+          color={COLOR.main}
           style={styles.submit} 
           onPress={submitHandler}
         />
@@ -121,11 +135,11 @@ const styles = StyleSheet.create({
     borderRadius: 20,
   },
   nameInput: {
-    width: 150,
+    width: '50%',
     fontSize: 15,
   },
   descriptionInput: {
-    width: 300,
+    width: '90%',
     fontSize: 15,
   },
   header: {
@@ -145,9 +159,12 @@ const styles = StyleSheet.create({
   checkBoxText: {
     marginLeft: 38,
   },
+  buttonContainer: {
+    marginBottom: 10,
+  },
   imageBox: {
-    width: 150,
-    height: 150,
+    width: 130,
+    height: 130,
   }
 });
 

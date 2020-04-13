@@ -1,4 +1,4 @@
-import { LOG_IN_SUCCESS, ERROR } from '../constants/index'
+import { LOG_IN_SUCCESS, LOADING, LOG_OUT } from '../constants/index'
 
 const initialState = {
   isLoggedIn: false,
@@ -13,10 +13,15 @@ const render = (state = initialState, action) => {
         ...state,
         isLoggedIn: true,
       };
-    case ERROR:
+    case LOADING:
       return {
         ...state,
-        isError: true,
+        isLoading: !state.isLoading,
+      };
+    case LOG_OUT:
+      return {
+        ...state,
+        isLoggedIn: false,
       };
     default:
       return {

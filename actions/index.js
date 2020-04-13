@@ -1,6 +1,6 @@
 import { 
   LOG_IN_SUCCESS, 
-  ERROR, LOCATION_SUCCESS, 
+  LOCATION_SUCCESS, 
   FETCH_CATS_DATA, 
   ADD_CAT_DATA, 
   CHOSEN_CAT, 
@@ -11,14 +11,12 @@ import {
   ADD_COMMENT,
   GET_COMMENTS,
   DELETE_COMMENT,
+  LOADING,
+  LOG_OUT,
 } from '../constants';
 
 export const logInSuccess = (data) => {
   return { type: LOG_IN_SUCCESS, data };
-};
-
-export const error = (message) => {
-  return { type: ERROR, message };
 };
 
 export const locationSuccess = (location) => {
@@ -63,4 +61,12 @@ export const addAcomment = (comment) => {
 
 export const deleteAcomment = (comment) => {
   return { type: DELETE_COMMENT, comment };
+};
+
+export const loading = () => {
+  return { type: LOADING };
+};
+
+export const logOut = () => {
+  return { type: LOG_OUT };
 };

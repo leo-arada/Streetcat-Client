@@ -4,11 +4,11 @@ import HomeContainer from '../containers/HomeContainer';
 import CatRegisterContainer from '../containers/CatRegisterContainer';
 import CatPageContainer from '../containers/CatPageContainer';
 import { Ionicons } from '@expo/vector-icons';
+import { COLOR } from '../constants/'
 
 const HomeStack = createStackNavigator();
 
 const HomeStackScreen = ({ navigation }) => {
-
   return (
     <HomeStack.Navigator>
       <HomeStack.Screen 
@@ -16,7 +16,7 @@ const HomeStackScreen = ({ navigation }) => {
         component={HomeContainer} 
         options={{ 
           headerStyle: {
-            backgroundColor: 'transparent',
+            backgroundColor: COLOR.main,
             elevation: 0,
           },
           title: '',
@@ -24,19 +24,24 @@ const HomeStackScreen = ({ navigation }) => {
             <Ionicons 
               name="md-add-circle" 
               size={50}
-              onPress={() => navigation.navigate('Register')}
+              color='black'
+              onPress={() => navigation.navigate('냥이등록')}
             />
           ),
           headerLeft: () => (
             <Ionicons
               name="md-list-box" size={50}
+              color='black'
               onPress={() => navigation.openDrawer()}
             />
           ),
         }} 
       />
-      <HomeStack.Screen name="Register" component={CatRegisterContainer}/>
-      <HomeStack.Screen name="Detail" component={CatPageContainer} options= {{ headerShown: false }}/>
+      <HomeStack.Screen name="냥이등록" component={CatRegisterContainer}/>
+      <HomeStack.Screen name="Detail" 
+        component={CatPageContainer} 
+        options= {{ headerShown: false }}
+      />
     </HomeStack.Navigator>
   );
 };

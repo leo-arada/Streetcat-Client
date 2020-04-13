@@ -4,6 +4,7 @@ import { AsyncStorage } from "react-native";
 const likePostRequest = async (catId) => {
   const token = await AsyncStorage.getItem('token');
   const id = await AsyncStorage.getItem('userId');
+
   const response = await fetch(`${SERVER_API}/cat/${catId}/like`, {
     method: 'POST',
     body: JSON.stringify({ id, catId }),

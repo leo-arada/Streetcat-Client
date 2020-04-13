@@ -4,7 +4,7 @@ import { View, Text, StyleSheet, Dimensions, TouchableOpacity } from 'react-nati
 const TileList = ({ cat, navigation }) => {
   return (
     <TouchableOpacity
-      style={{ flex: 1, paddingTop: 30 }}
+      style={{ flex: 1 }}
       onPress={() => 
         navigation.navigate('LikedDetail', {
           index: cat._id,

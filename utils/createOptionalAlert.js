@@ -1,6 +1,6 @@
 import { Alert } from 'react-native';
 
-const createOptionalAlert =(fristOpt, secondOpt, runFunction) => {
+const createOptionalAlert = (fristOpt, secondOpt, runFunction) => {
   Alert.alert(
     fristOpt,
     secondOpt,
