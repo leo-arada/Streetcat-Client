@@ -27,6 +27,7 @@ const CatRegisterScreen = ({ sendDataToServer, photo, displyPhoto, location }) =
     if (!friendliness.answer) return alert('친화력을 골라 주세요!');
     if (!photo.uri) return alert('고양이 사진을 등록해주세요');
     
+
     hasRegistered.current = true;
     const data = {
       name,
@@ -75,7 +76,7 @@ const CatRegisterScreen = ({ sendDataToServer, photo, displyPhoto, location }) =
                 return (
                   <>
                     <CheckBox
-                      key={Math.random().toString() + i + value} 
+                      key={value} 
                       color={COLOR.second}
                       onPress={() => setFriendliness({ answer: value })}
                       checked={friendliness.answer===value}

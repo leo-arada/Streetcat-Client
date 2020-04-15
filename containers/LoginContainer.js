@@ -3,7 +3,7 @@ import { APP_ID, SERVER_API } from 'react-native-dotenv';
 import * as Facebook from 'expo-facebook';
 import { useDispatch, useSelector } from 'react-redux';
 import saveToken from '../utils/saveToken';
-import { logInSuccess, locationSuccess, loading } from '../actions';
+import { logInSuccess, logInSuccessUser, logInSuccessCat, locationSuccess, loading } from '../actions';
 import useFetch from '../utils/useFetch';
 import Loading from '../components/Loading';
 import LoginScreen from '../screens/LoginScreen';
@@ -12,11 +12,10 @@ import { Alert } from 'react-native';
 const LoginContainer = () => {
   const { isLoading } = useSelector((state) => state.render);                                                                                                                                                                                                                                                                                                                                     
   const dispatch = useDispatch();
-
   const saveLocation = (location) => {
     dispatch(locationSuccess(location));
   };
-  console.log(SERVER_API)
+ 
   useFetch(saveLocation);
   
   const changeLoadingStatus = () => {
@@ -40,16 +39,19 @@ const LoginContainer = () => {
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ facebookId: id, name }),
         });
-        const data = await response.json();
-        if (data.result !== 'ok') {
+        const { result, user, cats, accessToken } = await response.json();
+        if (result !== 'ok') {
           return Alert.alert('로그인 에러입니다. 다시 시도해주세요');
         }
-        
-        dispatch(logInSuccess(data));
-        saveToken('token', data.token, 'userId', data.user.mongoId);
+
+        dispatch(logInSuccessUser(user));
+        dispatch(logInSuccessCat(cats));
+        dispatch(logInSuccess());
+        saveToken('token', accessToken, 'userId', user.mongoId);
         changeLoadingStatus();
       } 
     } catch (error) {
+      changeLoadingStatus();
       Alert.alert('로그인 에러입니다. 다시 시도해주세요');
     }
   };

@@ -14,6 +14,7 @@ const AppContainer = () => {
 
   const fetchMyCats = async (userId) => {
     const api = `${SERVER_API}/user/${userId}/mycats`;
+
     return await getRequestWithToken(api);
   };
 
@@ -26,7 +27,6 @@ const AppContainer = () => {
     await AsyncStorage.removeItem('token');
     await AsyncStorage.removeItem('userId');
     const token = await AsyncStorage.getItem('token');
-    console.log(token);
     dispatch(logOut());
   };
 

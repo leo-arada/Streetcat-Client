@@ -5,7 +5,7 @@ import * as ImagePicker from 'expo-image-picker';
 import { useSelector, useDispatch } from 'react-redux';
 import { SERVER_API } from 'react-native-dotenv';
 import { AsyncStorage } from "react-native";
-import { catsData, addAcat } from '../actions';
+import { catsData, addAcat, userLocation } from '../actions';
 import { Alert } from 'react-native';
 
 const CatRegisterContainer = ({ navigation }) => {
@@ -37,6 +37,7 @@ const CatRegisterContainer = ({ navigation }) => {
 
   const sendDataToServer = async (catData, catPhoto) => {
     try {
+
       const token = await AsyncStorage.getItem('token');
       const id = await AsyncStorage.getItem('userId');
       const photo = {
@@ -55,8 +56,8 @@ const CatRegisterContainer = ({ navigation }) => {
       data.append('longitude', catData.location[1]);
       data.append('name', catData.name);
       data.append('time', new Date().toISOString());
-      
-      const response = await fetch(`${SERVER_API}/cat/uploadImages`,{
+
+      const response = await fetch(`${SERVER_API}/cat`,{
         method: 'POST',
         body: data,
         headers: {
@@ -69,9 +70,10 @@ const CatRegisterContainer = ({ navigation }) => {
       if (message !== 'ok') {
         return Alert.alert('고양이 등록이 실패했습니다. 다시 시도해 주세요');
       }
-
+      const currentLocation = { latitude: location.latitude, longitude: location.longitude }
       dispatch(addAcat(cat));
-      dispatch(catsData({ latitude: location.latitude, longitude: location.longitude }));
+      dispatch(userLocation(currentLocation));
+      dispatch(catsData(currentLocation));
       Alert.alert('고양이 등록이 완료돼었습니다.');
       navigation.navigate('Home');
     } catch (error) {

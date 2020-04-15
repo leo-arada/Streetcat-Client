@@ -1,8 +1,8 @@
 import { 
-  LOG_IN_SUCCESS, 
+  LOG_IN_SUCCESS_USER,
   LOCATION_SUCCESS, 
-  FETCH_CATS_DATA, 
-  UPDATE_USER_CATS 
+  UPDATE_USER_CATS,
+  GET_USER_LOCATION,
 } from '../constants/index';
 
 const initialState = {
@@ -14,17 +14,13 @@ const initialState = {
 
 const user = (state = initialState, action) => {
   switch(action.type) {
-    case LOG_IN_SUCCESS:
+    case LOG_IN_SUCCESS_USER:
       return {
         ...state,
-        ...action.data.user,
+        ...action.user,
       };
     case LOCATION_SUCCESS:
-      return {
-        ...state,
-        location: action.location,
-      };
-    case FETCH_CATS_DATA:
+    case GET_USER_LOCATION:
       return {
         ...state,
         location: action.location,
@@ -33,7 +29,6 @@ const user = (state = initialState, action) => {
       return {
         ...state,
         cats: action.cats,
-
       };
     default:
       return {

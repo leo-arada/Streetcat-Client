@@ -7,6 +7,8 @@ export const DELETE_CAT = 'DELETE_CAT';
 export const UPDATE_CATS_DATA_COMMENT = 'UPDATE_CATS_DATA_COMMENT';
 export const DELETE_COMMENT = 'DELETE_COMMENT';
 export const LOG_IN_SUCCESS = 'LOG_IN_SUCCESS';
+export const LOG_IN_SUCCESS_CAT = 'LOG_IN_SUCCESS_CAT';
+export const LOG_IN_SUCCESS_USER = 'LOG_IN_SUCCESS_USER';
 export const LOG_OUT = 'LOG_OUT';
 export const LOCATION_SUCCESS = 'LOCATION_SUCCESS';
 export const regPatterns = {
@@ -14,6 +16,7 @@ export const regPatterns = {
   textArea: /^[a-zA-Z0-9[ㄱ-ㅎ|ㅏ-ㅣ|가-힣.,\s]{1,30}$/g,
 };
 
+export const GET_USER_LOCATION = 'GET_USER_LOCATION';
 export const checkboxValues = ['상', '중', '하'];
 export const actionSheetValue = ['상', '중', '하', '취소'];
 export const CHOSEN_CAT = 'CHOSEN_CAT';

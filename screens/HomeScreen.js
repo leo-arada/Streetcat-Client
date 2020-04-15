@@ -3,7 +3,7 @@ import { StyleSheet, View, Text, Dimensions, Image } from 'react-native';
 import MapView, { PROVIDER_GOOGLE, Marker, Callout, Circle } from 'react-native-maps';
 import { COLOR, MARKER, CAT_MARKER } from '../constants';
 
-const HomeScreen = ({ location, nearCat, onPresshandler, navigation, getClickedCatData }) => {
+const HomeScreen = ({ location, newLocation, nearCat, changeLocation, navigation, getClickedCatData }) => {
   const callOutClickHandler = (index) => {
     getClickedCatData(index);
     navigation.navigate('Detail', {
@@ -14,7 +14,7 @@ const HomeScreen = ({ location, nearCat, onPresshandler, navigation, getClickedC
   return (
     <View style={styles.container}>
       <MapView
-        onPress={onPresshandler}
+        onPress={changeLocation}
         provider={PROVIDER_GOOGLE}
         style={styles.map}
         region={{
@@ -25,12 +25,12 @@ const HomeScreen = ({ location, nearCat, onPresshandler, navigation, getClickedC
         }}
       > 
         <Circle
-          center = {{ latitude: location.latitude, longitude: location.longitude }}
+          center = {{ latitude: newLocation.latitude, longitude: newLocation.longitude }}
           radius = {500}
           fillColor={COLOR.circle}
         />
         <Marker
-          coordinate={{ latitude: location.latitude, longitude: location.longitude }}
+          coordinate={{ latitude: newLocation.latitude, longitude: newLocation.longitude }}
         >
           <View style={styles.markerBox}>
             <Text style={styles.pinText}>현재위치</Text>
@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
   },
   map: {
     width: Dimensions.get('window').width,
-    height: Dimensions.get('window').height /1.1,
+    height: Dimensions.get('window').height /1.2,
   },
   markerBox: {
     alignItems: 'center',

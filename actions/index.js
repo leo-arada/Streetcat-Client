@@ -1,5 +1,7 @@
 import { 
-  LOG_IN_SUCCESS, 
+  LOG_IN_SUCCESS,
+  LOG_IN_SUCCESS_USER,
+  LOG_IN_SUCCESS_CAT,
   LOCATION_SUCCESS, 
   FETCH_CATS_DATA, 
   ADD_CAT_DATA, 
@@ -13,14 +15,27 @@ import {
   DELETE_COMMENT,
   LOADING,
   LOG_OUT,
+  GET_USER_LOCATION,
 } from '../constants';
 
-export const logInSuccess = (data) => {
-  return { type: LOG_IN_SUCCESS, data };
+export const logInSuccessCat = (cats) => {
+  return { type: LOG_IN_SUCCESS_CAT, cats };
+};
+
+export const logInSuccessUser = (user) => {
+  return { type: LOG_IN_SUCCESS_USER, user };
+};
+
+export const logInSuccess = () => {
+  return { type: LOG_IN_SUCCESS };
 };
 
 export const locationSuccess = (location) => {
   return { type: LOCATION_SUCCESS, location };
+};
+
+export const userLocation = (location) => {
+  return { type: GET_USER_LOCATION, location };
 };
 
 export const catsData = (location) => {

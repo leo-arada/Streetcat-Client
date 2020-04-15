@@ -26,7 +26,7 @@ const CatPageScreen = ({
   const [description, setDescription] = useState(cat.description);
   const [name, setName] = useState(cat.name);
   const hasSubmitted = useRef(false);
-
+  
   const updateHandler = async () => {
     if(hasSubmitted.current) return;
 
@@ -39,8 +39,6 @@ const CatPageScreen = ({
     }else if(!name) {
       return alert('이름을 꼭 입력해 주세요!');
     }
-
-    hasSubmitted.current = true;
   
     const updatedata = {
       name,

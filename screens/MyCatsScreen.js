@@ -9,9 +9,7 @@ const MyCatsScreen = ({ user, fetchMyCats, navigation }) => {
   useEffect(() => {
     const foucsListner = navigation.addListener('focus', async () => {
       const { result, cats } = await fetchMyCats(user.mongoId);
-      console.log(result)
       if (result !== 'ok') {
-        changeLoadingStatus();
         return Alert.alert('내가 좋아한 냥이 정보 가져오기가 실패했습니다. 다시 시도해주세요');
       }
       
@@ -19,7 +17,7 @@ const MyCatsScreen = ({ user, fetchMyCats, navigation }) => {
     });
  
     return foucsListner;
-  }, [navigation]);
+  }, []);
 
   return (
     <View style={styles.screen}>

@@ -1,42 +1,58 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState } from 'react';
 import HomeScreen from '../screens/HomeScreen'
-import { catsData, clickedCat } from '../actions';
+import { catsData, clickedCat, userLocation } from '../actions';
 import { useSelector, useDispatch } from 'react-redux';
 import getRequestWithToken from '../utils/getRequestWithToken';
 import { SERVER_API } from 'react-native-dotenv';
+import { Alert } from 'react-native';
 
 const HomeContainer = ({ navigation }) => {
-  const { latitude, longitude } = useSelector((state) => state.user.location);
-  const [newLocation, setNewLocaiton] = useState({ latitude, longitude });
+  const { location } = useSelector((state) => state.user);
+  const [newLocation, setNewLocaiton] = useState({ 
+    latitude: location.latitude, 
+    longitude: location.longitude 
+  });
   const { catsAround } = useSelector((state) => state.cat);
   const dispatch = useDispatch();
   
-  const onPresshandler = useCallback((e) => {
-    const { latitude, longitude } = e.nativeEvent.coordinate;
-    setNewLocaiton({ latitude, longitude });
-  }, [latitude, longitude]);
-
   const getClickedCatData = (index) => {
     dispatch(clickedCat(index));
+  };
+
+  const changeLocation = (e) => {
+    const { latitude, longitude } = e.nativeEvent.coordinate;
+    Alert.alert('위치변경', '위치변경을 하시겠습니까?',
+      [
+        { text: '네', onPress:() => {
+          setNewLocaiton({ latitude, longitude });
+          getRequestWithToken(`${SERVER_API}/cat`);
+          dispatch(userLocation({ latitude, longitude }))
+          dispatch(catsData({ latitude, longitude }));
+        }
+         },
+        { text: '취소' }
+      ],
+    );
   };
 
   useEffect(() => {
     let mounted = true;
     getRequestWithToken(`${SERVER_API}/cat`);
-    dispatch(
-      catsData({ 
-        latitude: newLocation.latitude, 
-        longitude: newLocation.longitude,
-      })
-    );
+    const currentLocation = { 
+      latitude: location.latitude, 
+      longitude: location.longitude,
+    };
+    dispatch(userLocation(currentLocation));
+    dispatch(catsData(currentLocation));
     return () => mounted = false;
-  }, [newLocation]);
+  }, []);
   
   return (
     <HomeScreen 
-      location={newLocation} 
+      location={location}
+      newLocation={newLocation}
       nearCat={catsAround} 
-      onPresshandler={onPresshandler}
+      changeLocation={changeLocation}
       navigation={navigation}
       getClickedCatData={getClickedCatData}
     />

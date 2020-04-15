@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import CatpageScreen from '../screens/CatPageScreen';
 import { 
@@ -95,8 +95,8 @@ const CatPageContainer = ({ route, navigation }) => {
         },  
       });
   
-      const { cat, message } = await response.json();
-      if (message != 'ok') return Alert.alert('정보를 수정하는데 실패했습니다. 다시 시도해주세요');
+      const { cat, result } = await response.json();
+      if (result !== 'ok') return Alert.alert('정보를 수정하는데 실패했습니다. 다시 시도해주세요');
       dispatch(modifyAcat(cat));
       navigation.goBack();
     } catch (error) {
@@ -104,7 +104,10 @@ const CatPageContainer = ({ route, navigation }) => {
     }
   };
 
+  const hasLiked = useRef(false);
   const sendLikePostRequest = async (catId) => {
+    if (hasLiked.current) return;
+    hasLiked.current = true;
     try {
       const { cat, result } = await likePostRequest(catId);
       if (result === 'ok') {
@@ -146,6 +149,7 @@ const CatPageContainer = ({ route, navigation }) => {
 
   const sendDeleteRequestForComment = (commentId) => {
     const helper = async () => {
+
       try {
         const { _id } = cat;
         const token = await AsyncStorage.getItem('token');
@@ -157,9 +161,9 @@ const CatPageContainer = ({ route, navigation }) => {
             'Content-Type': 'application/json',
           },  
         });
-        const { newCat, comment, result } = await response.json();
+        const { kitty, comment, result } = await response.json();
         if (result !== 'ok') return Alert.alert('코멘트 삭제가 실패했습니다. 다시 시도해주세요');
-        dispatch(updateCatsComment(newCat));
+        dispatch(updateCatsComment(kitty));
         dispatch(deleteAcomment(comment));
       } catch (error) {
         Alert.alert('코멘트 삭제가 실패했습니다. 다시 시도해주세요');

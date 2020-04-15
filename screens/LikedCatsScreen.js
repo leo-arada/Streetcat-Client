@@ -20,7 +20,7 @@ const LikedCatsScreen = ({ user, fetchLikedcats, navigation }) => {
     });
  
     return foucsListner;
-  }, [navigation]);
+  }, []);
 
   return (
     <View style={styles.screen}>

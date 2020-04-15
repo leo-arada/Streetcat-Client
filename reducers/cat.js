@@ -1,5 +1,6 @@
+import { getDistance } from 'geolib';
 import { 
-  LOG_IN_SUCCESS, 
+  LOG_IN_SUCCESS_CAT, 
   FETCH_CATS_DATA, 
   ADD_CAT_DATA, 
   CHOSEN_CAT, 
@@ -8,7 +9,6 @@ import {
   DELETE_CAT,
   UPDATE_CATS_DATA_COMMENT,
 } from '../constants/index';
-import { getDistance } from 'geolib';
 
 const initialState = {
   catLists: [],
@@ -19,11 +19,10 @@ const initialState = {
 
 const cat = (state = initialState, action) => {
   switch(action.type) {
-    case LOG_IN_SUCCESS:
-      const { cats } = action.data;
+    case LOG_IN_SUCCESS_CAT:
       return {
         ...state,
-        catLists: cats,
+        catLists: action.cats,
       };
     case FETCH_CATS_DATA:
       const { latitude, longitude } = action.location;
