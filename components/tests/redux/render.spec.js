@@ -1,5 +1,5 @@
-import render from '../../reducers/render';
-import { LOG_IN_SUCCESS, LOADING, LOG_OUT } from '../../constants';
+import render from '../../../reducers/render';
+import { LOG_IN_SUCCESS, LOADING, LOG_OUT } from '../../../constants';
 
 describe('rener reducer', () => {
   const initialState = {

@@ -7,7 +7,7 @@ const CommentList = ({ comment, userId, deleteComment }) => {
     <View style={styles.listBox}>
       <Text style={styles.name}>{comment.writerName}   </Text>
       <Text style={styles.content}>{comment.content}</Text>
-      { comment.writerId === userId && (
+      {comment.writerId === userId && (
          <Icon
           style={styles.deleteIcon} 
           name="md-close-circle"

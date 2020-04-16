@@ -1,4 +1,4 @@
-import cat from '../../reducers/cat';
+import cat from '../../../reducers/cat';
 import {   
   LOG_IN_SUCCESS_CAT, 
   FETCH_CATS_DATA, 
@@ -7,7 +7,7 @@ import {
   UPDATE_CATS_DATA_LIKE, 
   MODIFY_CAT_DATA,
   DELETE_CAT, 
-} from '../../constants';
+} from '../../../constants';
 
 describe('cat reducer', () => {
   const initialState = {

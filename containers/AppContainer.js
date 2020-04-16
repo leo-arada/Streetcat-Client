@@ -26,7 +26,7 @@ const AppContainer = () => {
   const proceedLogout = async () => {
     await AsyncStorage.removeItem('token');
     await AsyncStorage.removeItem('userId');
-    const token = await AsyncStorage.getItem('token');
+    await AsyncStorage.getItem('token');
     dispatch(logOut());
   };
 

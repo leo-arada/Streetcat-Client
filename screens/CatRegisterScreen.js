@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, Fragment } from 'react';
 import { 
   StyleSheet, 
   View, 
@@ -58,15 +58,15 @@ const CatRegisterScreen = ({ sendDataToServer, photo, displyPhoto, location }) =
             <View style={styles.checkBoxContainer}>
               {checkboxValues.map((value, i) => {
                 return (
-                  <>
+                  <Fragment key={Math.random().toString() + i + value}>
                     <CheckBox
-                      key={Math.random().toString() + i + value}
+                      // key={Math.random().toString() + i + value}
                       color={COLOR.second}
                       onPress={() => setAccessibility({ answer: value })}
                       checked={accessibility.answer===value}
                     />
                     <Text style={styles.checkBoxText}>{value}</Text>
-                  </>    
+                  </Fragment>    
                 );
               })}
             </View >
@@ -74,15 +74,15 @@ const CatRegisterScreen = ({ sendDataToServer, photo, displyPhoto, location }) =
             <View style={styles.checkBoxContainer}>
               {checkboxValues.map((value, i) => {
                 return (
-                  <>
+                  <Fragment key={Math.random().toString() + i + value}>
                     <CheckBox
-                      key={value} 
+                      // key={value} 
                       color={COLOR.second}
                       onPress={() => setFriendliness({ answer: value })}
                       checked={friendliness.answer===value}
                     />
                     <Text style={styles.checkBoxText}>{value}</Text>
-                  </>    
+                  </Fragment>    
                 );
               })}
             </View >

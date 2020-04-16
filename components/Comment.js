@@ -8,7 +8,7 @@ const Comment = ({ cat, userId, comments, postRequesAddComment, deleteComment })
   const inputHandler = (value) => {
     setComment(value);
   };
-
+ 
   const addAComment = async (comment) => {
     if (!comment) return Alert.alert('코멘트 내용을 입력해주세요!!');
     if (hasPosted.current) return;
@@ -19,7 +19,7 @@ const Comment = ({ cat, userId, comments, postRequesAddComment, deleteComment })
 
   return (
     <View style={styles.screen}>
-      {comments.map((comment, i) => {
+      {comments.lenth > 0 || comments.map((comment, i) => {
         return (
           <CommentList 
             comment={comment} 

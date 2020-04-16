@@ -1,5 +1,5 @@
-import user from '../../reducers/user';
-import { LOG_IN_SUCCESS_USER, LOCATION_SUCCESS, UPDATE_USER_CATS } from '../../constants';
+import user from '../../../reducers/user';
+import { LOG_IN_SUCCESS_USER, LOCATION_SUCCESS, UPDATE_USER_CATS } from '../../../constants';
 
 describe('user reducer', () => {
   const initialState = {
