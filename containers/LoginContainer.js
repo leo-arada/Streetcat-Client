@@ -3,12 +3,17 @@ import { APP_ID, SERVER_API } from 'react-native-dotenv';
 import * as Facebook from 'expo-facebook';
 import { useDispatch, useSelector } from 'react-redux';
 import saveToken from '../utils/saveToken';
-import { logInSuccess, logInSuccessUser, logInSuccessCat, locationSuccess, loading } from '../actions';
+import { 
+  logInSuccess, 
+  logInSuccessUser, 
+  logInSuccessCat, 
+  locationSuccess, 
+  loading,
+} from '../actions';
 import useFetch from '../utils/useFetch';
 import Loading from '../components/Loading';
 import LoginScreen from '../screens/LoginScreen';
 import { Alert } from 'react-native';
-import axios from 'axios';
 
 const LoginContainer = () => {
   const { isLoading } = useSelector((state) => state.render);                                                                                                                                                                                                                                                                                                                                     

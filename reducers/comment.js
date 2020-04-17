@@ -1,4 +1,4 @@
-import { GET_COMMENTS, ADD_COMMENT, DELETE_COMMENT } from '../constants/index'
+import { GET_COMMENTS, ADD_COMMENT, DELETE_COMMENT, REST_COMMENTS } from '../constants/index'
 
 const initialState = {
   comments: [],
@@ -24,6 +24,11 @@ const comment = (state = initialState, action) => {
         ...state,
         comments: state.comments.filter((eachComment) => eachComment._id !== comment),
       };
+    case REST_COMMENTS:
+      return {
+        ...state,
+        comments: [],
+      }
     default:
       return {
         ...state,

@@ -3,16 +3,16 @@ import { View, Text, StyleSheet } from 'react-native';
 import { Button } from 'native-base';
 import BackButton from '../components/BackButton';
 
-const CustomHeader = ({ navigation, isFounder, setIsModifying, sendDeleteRequest }) => {
+const CustomHeader = ({ navigation, isFounder, setIsModifying, sendDeleteRequest, emptyComments }) => {
   return (
     <View style={styles.header}>
       <View style={styles.left}>
-        <BackButton navigation={navigation} />
+        <BackButton navigation={navigation} emptyComments={emptyComments}/>
       </View>
       <View style={styles.right}>
       {isFounder && (
         <View style={{ flexDirection: 'row' }}>
-           <View style={styles.buttonBox}>
+          <View style={styles.buttonBox}>
             <Button
               style={styles.button}
               rounded

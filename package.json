@@ -15,11 +15,9 @@
     "@react-navigation/drawer": "^5.4.0",
     "@react-navigation/native": "^5.1.4",
     "@react-navigation/stack": "^5.2.9",
-    "axios": "^0.19.2",
     "expo": "~36.0.0",
     "expo-constants": "~8.0.0",
     "expo-facebook": "~8.0.0",
-    "expo-font": "~8.0.0",
     "expo-image-picker": "~8.0.1",
     "expo-location": "~8.0.0",
     "expo-permissions": "~8.0.0",
@@ -43,14 +41,9 @@
     "babel-preset-expo": "~8.0.0",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.2",
-    "enzyme-to-json": "^3.4.4",
     "jest": "^25.3.0",
-    "jest-environment-enzyme": "^7.1.2",
-    "jest-enzyme": "^7.1.2",
     "jest-expo": "^37.0.0",
-    "jest-expo-enzyme": "^1.0.0",
-    "react-native-dotenv": "^0.2.0",
-    "react-test-renderer": "^16.13.1"
+    "react-native-dotenv": "^0.2.0"
   },
   "private": true,
   "jest": {

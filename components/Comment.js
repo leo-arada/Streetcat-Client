@@ -53,13 +53,13 @@ const styles = StyleSheet.create({
     flex: 1, 
     justifyContent: 'center', 
     alignItems: 'center',
+    marginTop: 10,
   },
   commentContainer: {
     borderTopWidth: 1, 
     borderTopColor: '#CACFD2', 
     width: '100%', 
     padding: 7,
-    marginTop: 70,
     flexDirection: 'row',
   },
   inputText: {

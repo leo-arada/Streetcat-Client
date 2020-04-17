@@ -1,9 +1,18 @@
 import React, { useState, useRef } from 'react';
-import { StyleSheet, View, Text, Dimensions, TouchableOpacity, Image, ScrollView  } from 'react-native';
+import { 
+  StyleSheet, 
+  View, 
+  Text, 
+  Dimensions, 
+  TouchableOpacity, 
+  Image, 
+  ScrollView,
+  Alert,
+} from 'react-native';
 import CustomHeader from '../components/CustomHeader';
 import Input from '../components/Input';
 import handleInput from '../utils/handleInput';
-import  { actionSheetValue } from '../constants'
+import  { ACTION_SHEET_VALUE } from '../constants'
 import { Icon, Button } from 'native-base';
 import ActionSheetButton from '../components/ActionSheetButton';
 import Comment from '../components/Comment';
@@ -19,6 +28,7 @@ const CatPageScreen = ({
   comments,
   postRequesAddComment,
   deleteComment,
+  emptyComments,
 }) => {
   const [isModyfing, setIsModifying] = useState(false);
   const [accessibility, setAccessibility] = useState({ clicked: cat.accessibility });
@@ -29,15 +39,14 @@ const CatPageScreen = ({
   
   const updateHandler = async () => {
     if(hasSubmitted.current) return;
-
     if (!name) {
-      return alert('이름을 입력해주세요');
+      return Alert.alert('이름을 입력해주세요');
     }else if(accessibility.clicked === '취소') {
-      return alert('난이도를 골라주세요');
+      return Alert.alert('난이도를 골라주세요');
     } else if (friendliness.clicked === '취소') {
-      return alert('친화력을 골라주세요');
+      return Alert.alert('친화력을 골라주세요');
     }else if(!name) {
-      return alert('이름을 꼭 입력해 주세요!');
+      return Alert.alert('이름을 꼭 입력해 주세요!');
     }
   
     const updatedata = {
@@ -59,6 +68,7 @@ const CatPageScreen = ({
           navigation={navigation} 
           isFounder={isFounder}
           setIsModifying={setIsModifying}
+          emptyComments={emptyComments}
         />
         <View style={styles.inputContainer}>
           <Image
@@ -83,7 +93,7 @@ const CatPageScreen = ({
             <View style={styles.actionContainer}>
               <View style={styles.actionBox}>
                 <ActionSheetButton 
-                  array={actionSheetValue}
+                  array={ACTION_SHEET_VALUE}
                   cancelIndex={3}
                   title={'난이도 수정'}
                   actionFunction={setAccessibility}
@@ -91,7 +101,7 @@ const CatPageScreen = ({
               </View>
               <View style={styles.actionBox}>
                 <ActionSheetButton 
-                  array={actionSheetValue}
+                  array={ACTION_SHEET_VALUE}
                   cancelIndex={3}
                   title={'친화력 수정'}
                   actionFunction={setFriendliness}
@@ -108,7 +118,7 @@ const CatPageScreen = ({
               value={description}
             />
           <TouchableOpacity onPress={()=> sendLikePostRequest(cat._id)}>
-              <Icon name='heart' style={styles.likeButton}/>
+            <Icon name='heart' style={styles.likeButton}/>
           </TouchableOpacity>
         </View>
       </View>

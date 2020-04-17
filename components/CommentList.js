@@ -8,7 +8,7 @@ const CommentList = ({ comment, userId, deleteComment }) => {
       <Text style={styles.name}>{comment.writerName}   </Text>
       <Text style={styles.content}>{comment.content}</Text>
       {comment.writerId === userId && (
-         <Icon
+        <Icon
           style={styles.deleteIcon} 
           name="md-close-circle"
           onPress={() => deleteComment(comment._id)}
@@ -21,15 +21,18 @@ const CommentList = ({ comment, userId, deleteComment }) => {
 const styles = StyleSheet.create({
   listBox: {
     flexDirection: 'row',
-    padding: 10,
+    padding: 5,
   },
   name: {
     fontWeight: 'bold', 
-    fontSize: 18,
+    fontSize: 20,
+    width: '30%',
+    textAlign: 'center'
   },
   content: {
-    fontSize: 18, 
+    fontSize: 20, 
     textAlign: 'left',
+    width: '70%'
   },
   deleteIcon: {
     marginLeft: 10,

@@ -9,6 +9,7 @@ import {
   getComments, 
   addAcomment, 
   deleteAcomment,
+  resetCommnets,
 } from '../actions';
 import { SERVER_API } from 'react-native-dotenv';
 import { AsyncStorage } from "react-native";
@@ -34,6 +35,10 @@ const CatPageContainer = ({ route, navigation }) => {
     return state.cat.catsAround[index];
   });
 
+  const emptyComments = () => {
+    dispatch(resetCommnets());
+    navigation.goBack();
+  }
   const getRequestForComments = async (id) => {
     try {
       const { result, comments } = await getRequestWithToken(
@@ -57,7 +62,7 @@ const CatPageContainer = ({ route, navigation }) => {
           id: _id, 
           writerId: user.mongoId, 
           content: input, 
-          writerName: user.name 
+          writerName: user.name,
         }),
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -74,13 +79,14 @@ const CatPageContainer = ({ route, navigation }) => {
   };
 
   useEffect(() => {
-    let mounted = true;
-    if (cat) {
+    const fetchComments = async () => {
       getRequestForComments(cat._id);
       setIsFounder(user.mongoId === cat.founder);
+    };
+
+    if (cat) {
+      fetchComments();
     }
-    
-    return () => mounted = false;
   }, [cat]);
 
   const snedModifiedData = async (updatedata, catId) => {
@@ -135,6 +141,7 @@ const CatPageContainer = ({ route, navigation }) => {
             'Content-Type': 'application/json',
           },  
         });
+
         const res = await response.json();
         if (res.result !== 'ok') throw new Error();
           dispatch(deleteAcat(res.cat));
@@ -149,7 +156,6 @@ const CatPageContainer = ({ route, navigation }) => {
 
   const sendDeleteRequestForComment = (commentId) => {
     const helper = async () => {
-
       try {
         const { _id } = cat;
         const token = await AsyncStorage.getItem('token');
@@ -161,6 +167,7 @@ const CatPageContainer = ({ route, navigation }) => {
             'Content-Type': 'application/json',
           },  
         });
+        
         const { kitty, comment, result } = await response.json();
         if (result !== 'ok') throw new Error();
         dispatch(updateCatsComment(kitty));
@@ -186,6 +193,7 @@ const CatPageContainer = ({ route, navigation }) => {
         comments={comments}
         postRequesAddComment={postRequesAddComment}
         deleteComment={sendDeleteRequestForComment}
+        emptyComments={emptyComments}
       />
     ); 
   }

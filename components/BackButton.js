@@ -1,12 +1,12 @@
 import React from 'react';
 import { Ionicons } from '@expo/vector-icons';
 
-const BackButton = ({ navigation }) => {
+const BackButton = ({ emptyComments }) => {
   return (
     <Ionicons
       name="md-arrow-back"
       size={30}
-      onPress={() => navigation.goBack()}
+      onPress={emptyComments}
     />
   );
 };

@@ -33,8 +33,8 @@ const LikedCatsScreen = ({ user, fetchLikedcats, navigation }) => {
       </View>
       <View style={styles.listContainer}>
         <FlatList 
-           data={myCats}
-           renderItem={({ item }) => {
+          data={myCats}
+          renderItem={({ item }) => {
             if (item.empty) {
               return <View style={styles.invisible}></View>
             }
@@ -43,8 +43,8 @@ const LikedCatsScreen = ({ user, fetchLikedcats, navigation }) => {
               <TileList cat={item} navigation={navigation} />
             );
           }}
-           numColumns={2}
-           keyExtractor= {(item, index) => item._id + index.toString()}
+          numColumns={2}
+          keyExtractor= {(item, index) => item._id + index.toString()}
         />
       </View>
     </View>
@@ -67,13 +67,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'row',
-    justifyContent: "space-around"
+    justifyContent: "space-around",
   },
   invisible: {
     backgroundColor: 'transparent',
     alignItems: 'center',
     justifyContent: 'center',
-    height: Dimensions.get('window').width /2,
+    height: Dimensions.get('window').width / 2,
     flex: 1,
     margin: 1,
   },

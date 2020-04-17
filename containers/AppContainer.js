@@ -15,7 +15,6 @@ const AppContainer = () => {
   const fetchMyCats = async (userId) => {
     const api = `${SERVER_API}/user/${userId}/mycats`;
     return await getRequestWithToken(api);
-
   };
 
   const fetchLikedcats = async (userId) => {

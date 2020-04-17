@@ -12,6 +12,7 @@ import {
   UPDATE_CATS_DATA_COMMENT,
   ADD_COMMENT,
   GET_COMMENTS,
+  REST_COMMENTS,
   DELETE_COMMENT,
   LOADING,
   LOG_OUT,
@@ -77,6 +78,10 @@ export const addAcomment = (comment) => {
 export const deleteAcomment = (comment) => {
   return { type: DELETE_COMMENT, comment };
 };
+
+export const resetCommnets = () => {
+  return { type: REST_COMMENTS };
+}
 
 export const loading = () => {
   return { type: LOADING };

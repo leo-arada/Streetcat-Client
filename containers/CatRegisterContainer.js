@@ -13,17 +13,15 @@ const CatRegisterContainer = ({ navigation }) => {
   const { location } = useSelector((state) => state.user);
   const [photo, setPhoto] = useState({});
 
-  const getPermission = async () => {
-    const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
-    if (status !== 'granted') {
-      Alert.alert('위치 정보가 필요합니다');
-    }
-  };
-
   useEffect(() => {
-    let mounted = true;
+    const getPermission = async () => {
+      const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
+      if (status !== 'granted') {
+        Alert.alert('사진공유 허가가 필요합니다');
+      }
+    };
+
     getPermission();
-    return () => mounted = false;
   }, [photo]);
 
   const displyPhoto = useCallback(async () => {
@@ -37,7 +35,6 @@ const CatRegisterContainer = ({ navigation }) => {
 
   const sendDataToServer = async (catData, catPhoto) => {
     try {
-
       const token = await AsyncStorage.getItem('token');
       const id = await AsyncStorage.getItem('userId');
       const photo = {
@@ -70,6 +67,7 @@ const CatRegisterContainer = ({ navigation }) => {
       if (result !== 'ok') {
         throw new Error();
       }
+      
       const currentLocation = { latitude: location.latitude, longitude: location.longitude }
       dispatch(addAcat(cat));
       dispatch(userLocation(currentLocation));

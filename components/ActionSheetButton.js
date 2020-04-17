@@ -15,7 +15,7 @@ const ActionSheetButton = ({ array, cancelIndex, title, actionFunction }) => {
           title,
         },
         buttonIndex => {
-          actionFunction({ clicked: array[buttonIndex]})
+          actionFunction({ clicked: array[buttonIndex] })
         }
       )}
     >

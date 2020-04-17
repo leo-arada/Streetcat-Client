@@ -4,7 +4,7 @@ import BackButton from '../components/BackButton';
 import CoverImageList from '../components/CoverImageList';
 
 const MyCatsScreen = ({ user, fetchMyCats, navigation }) => {
-  const [myCats, setMyCats ] = useState([]);
+  const [myCats, setMyCats] = useState([]);
  
   useEffect(() => {
     const foucsListner = navigation.addListener('focus', async () => {

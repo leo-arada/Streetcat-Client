@@ -3,7 +3,14 @@ import { StyleSheet, View, Text, Dimensions, Image } from 'react-native';
 import MapView, { PROVIDER_GOOGLE, Marker, Callout, Circle } from 'react-native-maps';
 import { COLOR, MARKER, CAT_MARKER } from '../constants';
 
-const HomeScreen = ({ location, newLocation, nearCat, changeLocation, navigation, getClickedCatData }) => {
+const HomeScreen = ({ 
+  location, 
+  newLocation, 
+  nearCat, 
+  changeLocation, 
+  navigation, 
+  getClickedCatData 
+}) => {
   const callOutClickHandler = (index) => {
     getClickedCatData(index);
     navigation.navigate('Detail', {

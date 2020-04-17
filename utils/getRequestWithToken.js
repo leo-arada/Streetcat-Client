@@ -10,6 +10,7 @@ const getRequestWithToken = async (api) => {
       'Authorization': `Bearer ${token}`,
     }
     });
+    
     const res = await response.json();
     if (res.result !== 'ok') {
       throw new Error();

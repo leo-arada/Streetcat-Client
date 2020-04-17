@@ -10,7 +10,7 @@ const HomeContainer = ({ navigation }) => {
   const { location } = useSelector((state) => state.user);
   const [newLocation, setNewLocaiton] = useState({ 
     latitude: location.latitude, 
-    longitude: location.longitude 
+    longitude: location.longitude,
   });
   const { catsAround } = useSelector((state) => state.cat);
   const dispatch = useDispatch();
@@ -36,15 +36,18 @@ const HomeContainer = ({ navigation }) => {
   };
 
   useEffect(() => {
-    let mounted = true;
-    getRequestWithToken(`${SERVER_API}/cat`);
-    const currentLocation = { 
-      latitude: location.latitude, 
-      longitude: location.longitude,
-    };
-    dispatch(userLocation(currentLocation));
-    dispatch(catsData(currentLocation));
-    return () => mounted = false;
+    const fetchData = async() => {
+      await getRequestWithToken(`${SERVER_API}/cat`);
+      const currentLocation = { 
+        latitude: location.latitude, 
+        longitude: location.longitude,
+      };
+
+      dispatch(userLocation(currentLocation));
+      dispatch(catsData(currentLocation));
+    }
+    
+    fetchData();
   }, []);
   
   return (

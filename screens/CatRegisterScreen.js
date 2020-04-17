@@ -7,27 +7,27 @@ import {
   Button, 
   TouchableWithoutFeedback, 
   Keyboard,
+  Alert,
 } from 'react-native';
 import { CheckBox } from "native-base";
 import Input from '../components/Input';
-import  { checkboxValues, COLOR } from '../constants'
+import  { CHECKBOX_VALUE, COLOR } from '../constants'
 import handleInput from '../utils/handleInput';
 
 const CatRegisterScreen = ({ sendDataToServer, photo, displyPhoto, location }) => {
   const [name, setName] = useState('');
   const [accessibility, setAccessibility] = useState({ answer: '' });
-  const [friendliness, setFriendliness] = useState({ answer: ''});
+  const [friendliness, setFriendliness] = useState({ answer: '' });
   const [description, setDescription] = useState('');
   const hasRegistered = useRef(false);
 
   const submitHandler = async () => {
     if (hasRegistered.current) return;
-    if (!name) alert('이름을 꼭 입력해 주세요!');
-    if (!accessibility.answer) return alert('접근 난이도를 골라 주세요!');
-    if (!friendliness.answer) return alert('친화력을 골라 주세요!');
-    if (!photo.uri) return alert('고양이 사진을 등록해주세요');
+    if (!name) Alert.alert('이름을 꼭 입력해 주세요!');
+    if (!accessibility.answer) return Alert.alert('접근 난이도를 골라 주세요!');
+    if (!friendliness.answer) return Alert.alert('친화력을 골라 주세요!');
+    if (!photo.uri) return Alert.alert('고양이 사진을 등록해주세요');
     
-
     hasRegistered.current = true;
     const data = {
       name,
@@ -56,11 +56,10 @@ const CatRegisterScreen = ({ sendDataToServer, photo, displyPhoto, location }) =
             />
             <Text style={styles.header}>접근난이도</Text>
             <View style={styles.checkBoxContainer}>
-              {checkboxValues.map((value, i) => {
+              {CHECKBOX_VALUE.map((value, i) => {
                 return (
                   <Fragment key={Math.random().toString() + i + value}>
                     <CheckBox
-                      // key={Math.random().toString() + i + value}
                       color={COLOR.second}
                       onPress={() => setAccessibility({ answer: value })}
                       checked={accessibility.answer===value}
@@ -72,11 +71,10 @@ const CatRegisterScreen = ({ sendDataToServer, photo, displyPhoto, location }) =
             </View >
             <Text style={styles.header}>친화력</Text>
             <View style={styles.checkBoxContainer}>
-              {checkboxValues.map((value, i) => {
+              {CHECKBOX_VALUE.map((value, i) => {
                 return (
                   <Fragment key={Math.random().toString() + i + value}>
                     <CheckBox
-                      // key={value} 
                       color={COLOR.second}
                       onPress={() => setFriendliness({ answer: value })}
                       checked={friendliness.answer===value}
