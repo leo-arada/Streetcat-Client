@@ -40,7 +40,7 @@ const CatPageContainer = ({ route, navigation }) => {
         `${SERVER_API}/cat/${id}/comment`
       );
 
-      if (result !== 'ok') return Alert.alert('코멘트 정보를 가져오는데 실패했습니다.');
+      if (result !== 'ok') throw new Error();
       dispatch(getComments(comments));
     } catch (error) {
       Alert.alert('코멘트 정보를 가져오는데 실패했습니다.');
@@ -66,7 +66,7 @@ const CatPageContainer = ({ route, navigation }) => {
       });
       
       const { result, comment } = await response.json();
-      if (result !== 'ok') return Alert.Alert('코멘트를 추가하는데 실패했습니다. 다시 시도해 주세요.');
+      if (result !== 'ok') throw new Error();
       dispatch(addAcomment(comment));
     } catch (error) {
       return Alert.Alert('코멘트를 추가하는데 실패했습니다. 다시 시도해 주세요.');
@@ -96,7 +96,7 @@ const CatPageContainer = ({ route, navigation }) => {
       });
   
       const { cat, result } = await response.json();
-      if (result !== 'ok') return Alert.alert('정보를 수정하는데 실패했습니다. 다시 시도해주세요');
+      if (result !== 'ok') throw new Error();
       dispatch(modifyAcat(cat));
       navigation.goBack();
     } catch (error) {
@@ -115,7 +115,7 @@ const CatPageContainer = ({ route, navigation }) => {
       } else if (result === 'already done') {
         return;
       } else {
-        Alert.alert('다시 시도해주세요'); 
+        throw new Error();
       }
     } catch (error) {
       Alert.alert('다시 시도해주세요');
@@ -136,7 +136,7 @@ const CatPageContainer = ({ route, navigation }) => {
           },  
         });
         const res = await response.json();
-        if (res.result !== 'ok') return Alert.alert('삭제요청이 실패했습니다. 다시 시도해주세요');
+        if (res.result !== 'ok') throw new Error();
           dispatch(deleteAcat(res.cat));
           navigation.navigate('Home');
       } catch (error) {
@@ -162,7 +162,7 @@ const CatPageContainer = ({ route, navigation }) => {
           },  
         });
         const { kitty, comment, result } = await response.json();
-        if (result !== 'ok') return Alert.alert('코멘트 삭제가 실패했습니다. 다시 시도해주세요');
+        if (result !== 'ok') throw new Error();
         dispatch(updateCatsComment(kitty));
         dispatch(deleteAcomment(comment));
       } catch (error) {

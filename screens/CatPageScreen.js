@@ -141,10 +141,12 @@ const styles = StyleSheet.create({
   screen: {
     flex: 1,
     padding: 10,
+    height: '100%',
     alignItems: 'center',
   },
   inputContainer: {
     width: Dimensions.get('window').width / 1.1,
+    height: '90%',
     alignItems: 'center',
     elevation: 10,
     backgroundColor: 'white',

@@ -8,6 +8,7 @@ import useFetch from '../utils/useFetch';
 import Loading from '../components/Loading';
 import LoginScreen from '../screens/LoginScreen';
 import { Alert } from 'react-native';
+import axios from 'axios';
 
 const LoginContainer = () => {
   const { isLoading } = useSelector((state) => state.render);                                                                                                                                                                                                                                                                                                                                     
@@ -15,7 +16,7 @@ const LoginContainer = () => {
   const saveLocation = (location) => {
     dispatch(locationSuccess(location));
   };
- 
+
   useFetch(saveLocation);
   
   const changeLoadingStatus = () => {
@@ -39,9 +40,10 @@ const LoginContainer = () => {
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ facebookId: id, name }),
         });
+
         const { result, user, cats, accessToken } = await response.json();
         if (result !== 'ok') {
-          return Alert.alert('로그인 에러입니다. 다시 시도해주세요');
+          throw new Error();
         }
 
         dispatch(logInSuccessUser(user));

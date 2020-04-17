@@ -58,7 +58,8 @@ const styles = StyleSheet.create({
     borderTopWidth: 1, 
     borderTopColor: '#CACFD2', 
     width: '100%', 
-    padding: 7, 
+    padding: 7,
+    marginTop: 70,
     flexDirection: 'row',
   },
   inputText: {

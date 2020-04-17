@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
   },
   map: {
     width: Dimensions.get('window').width,
-    height: Dimensions.get('window').height /1.2,
+    height: '100%',
   },
   markerBox: {
     alignItems: 'center',

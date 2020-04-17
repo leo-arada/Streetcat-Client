@@ -66,9 +66,9 @@ const CatRegisterContainer = ({ navigation }) => {
         },  
       });
     
-      const { cat, message } = await response.json();
-      if (message !== 'ok') {
-        return Alert.alert('고양이 등록이 실패했습니다. 다시 시도해 주세요');
+      const { cat, result } = await response.json();
+      if (result !== 'ok') {
+        throw new Error();
       }
       const currentLocation = { latitude: location.latitude, longitude: location.longitude }
       dispatch(addAcat(cat));
