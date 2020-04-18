@@ -12,6 +12,7 @@ const HomeContainer = ({ navigation }) => {
     latitude: location.latitude, 
     longitude: location.longitude,
   });
+  
   const { catsAround } = useSelector((state) => state.cat);
   const dispatch = useDispatch();
   
