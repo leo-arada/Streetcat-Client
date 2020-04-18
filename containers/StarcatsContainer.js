@@ -11,7 +11,6 @@ const StarcatContainer = ({ navigation }) => {
   };
 
   const popularCats = getPopularCats(catLists);
-  
   return <StarCatsScreen popularCats={popularCats} navigation={navigation} />;
 };
 

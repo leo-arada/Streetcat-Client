@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
   content: {
     fontSize: 20, 
     textAlign: 'left',
-    width: '70%'
+    width: '60%'
   },
   deleteIcon: {
     marginLeft: 10,

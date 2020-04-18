@@ -9,7 +9,6 @@ import {
   getComments, 
   addAcomment, 
   deleteAcomment,
-  resetCommnets,
 } from '../actions';
 import { SERVER_API } from 'react-native-dotenv';
 import { AsyncStorage } from "react-native";
@@ -35,10 +34,6 @@ const CatPageContainer = ({ route, navigation }) => {
     return state.cat.catsAround[index];
   });
 
-  const emptyComments = () => {
-    dispatch(resetCommnets());
-    navigation.goBack();
-  }
   const getRequestForComments = async (id) => {
     try {
       const { result, comments } = await getRequestWithToken(
@@ -193,7 +188,6 @@ const CatPageContainer = ({ route, navigation }) => {
         comments={comments}
         postRequesAddComment={postRequesAddComment}
         deleteComment={sendDeleteRequestForComment}
-        emptyComments={emptyComments}
       />
     ); 
   }

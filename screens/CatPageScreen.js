@@ -28,7 +28,6 @@ const CatPageScreen = ({
   comments,
   postRequesAddComment,
   deleteComment,
-  emptyComments,
 }) => {
   const [isModyfing, setIsModifying] = useState(false);
   const [accessibility, setAccessibility] = useState({ clicked: cat.accessibility });
@@ -68,7 +67,6 @@ const CatPageScreen = ({
           navigation={navigation} 
           isFounder={isFounder}
           setIsModifying={setIsModifying}
-          emptyComments={emptyComments}
         />
         <View style={styles.inputContainer}>
           <Image

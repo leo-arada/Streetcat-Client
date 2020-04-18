@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import HomeScreen from '../screens/HomeScreen'
-import { catsData, clickedCat, userLocation } from '../actions';
+import { catsData, clickedCat, userLocation, resetCommnets } from '../actions';
 import { useSelector, useDispatch } from 'react-redux';
 import getRequestWithToken from '../utils/getRequestWithToken';
 import { SERVER_API } from 'react-native-dotenv';
@@ -18,6 +18,10 @@ const HomeContainer = ({ navigation }) => {
   
   const getClickedCatData = (index) => {
     dispatch(clickedCat(index));
+  };
+
+  const emptyComments = () => {
+    dispatch(resetCommnets());
   };
 
   const changeLocation = (e) => {
@@ -59,6 +63,7 @@ const HomeContainer = ({ navigation }) => {
       changeLocation={changeLocation}
       navigation={navigation}
       getClickedCatData={getClickedCatData}
+      emptyComments={emptyComments}
     />
   );
 };

@@ -9,9 +9,11 @@ const HomeScreen = ({
   nearCat, 
   changeLocation, 
   navigation, 
-  getClickedCatData 
+  getClickedCatData,
+  emptyComments,
 }) => {
   const callOutClickHandler = (index) => {
+    emptyComments();
     getClickedCatData(index);
     navigation.navigate('Detail', {
       index,

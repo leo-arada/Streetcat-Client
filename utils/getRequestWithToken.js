@@ -5,10 +5,10 @@ const getRequestWithToken = async (api) => {
   try {
     const token = await AsyncStorage.getItem('token');
     const response = await fetch(api, {
-    method: 'GET',
-    headers: {
-      'Authorization': `Bearer ${token}`,
-    }
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+      }
     });
     
     const res = await response.json();
