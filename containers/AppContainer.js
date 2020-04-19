@@ -2,9 +2,9 @@ import React from 'react';
 import { Root } from 'native-base';
 import { useSelector, useDispatch } from 'react-redux';
 import AppNavigator from '../navigation/AppNavigator';
-import { SERVER_API } from 'react-native-dotenv';
+import { API } from '../constants';
 import getRequestWithToken from '../utils/getRequestWithToken';
-import { logOut } from '../actions'
+import { logOut } from '../actions';
 import { AsyncStorage } from "react-native";
 
 const AppContainer = () => {
@@ -13,12 +13,12 @@ const AppContainer = () => {
   const { user } = useSelector((state) => state);
 
   const fetchMyCats = async (userId) => {
-    const api = `${SERVER_API}/user/${userId}/mycats`;
+    const api = `${API}/user/${userId}/mycats`;
     return await getRequestWithToken(api);
   };
 
   const fetchLikedcats = async (userId) => {
-    const api = `${SERVER_API}/user/${userId}/likedcats`;
+    const api = `${API}/user/${userId}/likedcats`;
     return await getRequestWithToken(api);
   };
 

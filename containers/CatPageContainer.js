@@ -10,7 +10,7 @@ import {
   addAcomment, 
   deleteAcomment,
 } from '../actions';
-import { SERVER_API } from 'react-native-dotenv';
+import { API } from '../constants';
 import { AsyncStorage } from "react-native";
 import likePostRequest from '../utils/likePostRequest';
 import getRequestWithToken from '../utils/getRequestWithToken';
@@ -37,7 +37,7 @@ const CatPageContainer = ({ route, navigation }) => {
   const getRequestForComments = async (id) => {
     try {
       const { result, comments } = await getRequestWithToken(
-        `${SERVER_API}/cat/${id}/comment`
+        `${API}/cat/${id}/comment`
       );
 
       if (result !== 'ok') throw new Error();
@@ -51,7 +51,7 @@ const CatPageContainer = ({ route, navigation }) => {
     try {
       const token = await AsyncStorage.getItem('token');
       const { _id } = cat;
-      const response = await fetch(`${SERVER_API}/cat/${cat._id}/comment`, {
+      const response = await fetch(`${API}/cat/${cat._id}/comment`, {
         method: 'POST',
         body: JSON.stringify({ 
           id: _id, 
@@ -87,7 +87,7 @@ const CatPageContainer = ({ route, navigation }) => {
   const snedModifiedData = async (updatedata, catId) => {
     try {
       const token = await AsyncStorage.getItem('token');
-      const response = await fetch(`${SERVER_API}/cat/${catId}`, {
+      const response = await fetch(`${API}/cat/${catId}`, {
         method: 'PUT',
         body: JSON.stringify(updatedata),
         headers: {
@@ -128,7 +128,7 @@ const CatPageContainer = ({ route, navigation }) => {
       try {
         const { _id, founder } = cat;
         const token = await AsyncStorage.getItem('token');
-        const response = await fetch(`${SERVER_API}/cat/${_id}`, {
+        const response = await fetch(`${API}/cat/${_id}`, {
           method: 'DELETE',
           body: JSON.stringify({ _id, founder }),
           headers: {
@@ -154,7 +154,7 @@ const CatPageContainer = ({ route, navigation }) => {
       try {
         const { _id } = cat;
         const token = await AsyncStorage.getItem('token');
-        const response = await fetch(`${SERVER_API}/cat/${_id}/comment/${commentId}`, {
+        const response = await fetch(`${API}/cat/${_id}/comment/${commentId}`, {
           method: 'DELETE',
           body: JSON.stringify({ catId: _id, commentId }),
           headers: {

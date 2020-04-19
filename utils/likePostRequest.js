@@ -1,10 +1,10 @@
-import { SERVER_API } from 'react-native-dotenv';
+import { API } from '../constants';
 import { AsyncStorage } from "react-native";
 
 const likePostRequest = async (catId) => {
   const token = await AsyncStorage.getItem('token');
   const id = await AsyncStorage.getItem('userId');
-  const response = await fetch(`${SERVER_API}/cat/${catId}/like`, {
+  const response = await fetch(`${API}/cat/${catId}/like`, {
     method: 'POST',
     body: JSON.stringify({ id, catId }),
     headers: {

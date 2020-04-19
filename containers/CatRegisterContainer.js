@@ -3,7 +3,7 @@ import CatRegisterScreen from '../screens/CatRegisterScreen';
 import * as Permissions from 'expo-permissions';
 import * as ImagePicker from 'expo-image-picker';
 import { useSelector, useDispatch } from 'react-redux';
-import { SERVER_API } from 'react-native-dotenv';
+import { API } from '../constants';
 import { AsyncStorage } from "react-native";
 import { catsData, addAcat, userLocation } from '../actions';
 import { Alert } from 'react-native';
@@ -54,7 +54,7 @@ const CatRegisterContainer = ({ navigation }) => {
       data.append('name', catData.name);
       data.append('time', new Date().toISOString());
 
-      const response = await fetch(`${SERVER_API}/cat`,{
+      const response = await fetch(`${API}/cat`,{
         method: 'POST',
         body: data,
         headers: {

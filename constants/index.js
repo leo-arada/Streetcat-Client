@@ -35,3 +35,5 @@ export const COLOR = {
   transparent: 'transparent',
   circle: 'rgba(200, 300, 200, 0.5)',
 };
+
+export const API = 'http://streetcat-development.ap-northeast-2.elasticbeanstalk.com';

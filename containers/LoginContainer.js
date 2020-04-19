@@ -1,5 +1,6 @@
 import React from 'react';
-import { APP_ID, SERVER_API } from 'react-native-dotenv';
+import { APP_ID } from 'react-native-dotenv';
+import { API } from '../constants';
 import * as Facebook from 'expo-facebook';
 import { useDispatch, useSelector } from 'react-redux';
 import saveToken from '../utils/saveToken';
@@ -40,7 +41,7 @@ const LoginContainer = () => {
           `https://graph.facebook.com/me?access_token=${token}`
         );
         const { id, name } = await fetchedData.json();
-        const response = await fetch(`${SERVER_API}/auth/login`, {
+        const response = await fetch(`${API}/auth/login`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ facebookId: id, name }),

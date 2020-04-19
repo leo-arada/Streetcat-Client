@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import HomeScreen from '../screens/HomeScreen'
 import { catsData, clickedCat, userLocation, resetCommnets, updateCatsData } from '../actions';
 import { useSelector, useDispatch } from 'react-redux';
-import getRequestWithToken from '../utils/getRequestWithToken';
-import { SERVER_API } from 'react-native-dotenv';
+import getRequestWithToken from '../utils/getRequestWithToken'
+import { API } from '../constants';
 import { Alert } from 'react-native';
 
 const HomeContainer = ({ navigation }) => {
@@ -12,7 +12,7 @@ const HomeContainer = ({ navigation }) => {
     latitude: location.latitude, 
     longitude: location.longitude,
   });
-  console.log(SERVER_API)
+
   const { catsAround } = useSelector((state) => state.cat);
   const dispatch = useDispatch();
   
@@ -30,7 +30,7 @@ const HomeContainer = ({ navigation }) => {
       [
         { text: '네', onPress: async () => {
           setNewLocaiton({ latitude, longitude });
-          const { cats } = await getRequestWithToken(`${SERVER_API}/cat`);
+          const { cats } = await getRequestWithToken(`${API}/cat`);
           dispatch(updateCatsData(cats));
           dispatch(userLocation({ latitude, longitude }))
           dispatch(catsData({ latitude, longitude }));
@@ -43,7 +43,7 @@ const HomeContainer = ({ navigation }) => {
 
   useEffect(() => {
     const fetchData = async() => {
-      await getRequestWithToken(`${SERVER_API}/cat`);
+      await getRequestWithToken(`${API}/cat`);
       const currentLocation = { 
         latitude: location.latitude, 
         longitude: location.longitude,
