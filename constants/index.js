@@ -1,6 +1,7 @@
 export const LOADING = 'LOADING';
 export const FETCH_CATS_DATA = 'FETCH_CATS_DATA';
 export const ADD_CAT_DATA = 'ADD_CAT_DATA';
+export const UPDATE_CATS_DATA = 'UPDATE_CATS_DATA';
 export const UPDATE_CATS_DATA_LIKE = 'UPDATE_CATS_DATA_LIKE';
 export const MODIFY_CAT_DATA = 'MODIFY_CAT_DATA';
 export const DELETE_CAT = 'DELETE_CAT';

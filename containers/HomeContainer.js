@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import HomeScreen from '../screens/HomeScreen'
-import { catsData, clickedCat, userLocation, resetCommnets } from '../actions';
+import { catsData, clickedCat, userLocation, resetCommnets, updateCatsData } from '../actions';
 import { useSelector, useDispatch } from 'react-redux';
 import getRequestWithToken from '../utils/getRequestWithToken';
 import { SERVER_API } from 'react-native-dotenv';
@@ -12,7 +12,7 @@ const HomeContainer = ({ navigation }) => {
     latitude: location.latitude, 
     longitude: location.longitude,
   });
-  
+  console.log(SERVER_API)
   const { catsAround } = useSelector((state) => state.cat);
   const dispatch = useDispatch();
   
@@ -28,9 +28,10 @@ const HomeContainer = ({ navigation }) => {
     const { latitude, longitude } = e.nativeEvent.coordinate;
     Alert.alert('위치변경', '위치변경을 하시겠습니까?',
       [
-        { text: '네', onPress:() => {
+        { text: '네', onPress: async () => {
           setNewLocaiton({ latitude, longitude });
-          getRequestWithToken(`${SERVER_API}/cat`);
+          const { cats } = await getRequestWithToken(`${SERVER_API}/cat`);
+          dispatch(updateCatsData(cats));
           dispatch(userLocation({ latitude, longitude }))
           dispatch(catsData({ latitude, longitude }));
         }

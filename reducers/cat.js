@@ -8,6 +8,7 @@ import {
   MODIFY_CAT_DATA,
   DELETE_CAT,
   UPDATE_CATS_DATA_COMMENT,
+  UPDATE_CATS_DATA,
 } from '../constants/index';
 
 const initialState = {
@@ -45,6 +46,11 @@ const cat = (state = initialState, action) => {
       return {
         ...state,
         catLists: [...state.catLists, newCat],
+      };
+    case UPDATE_CATS_DATA:
+      return {
+        ...state,
+        catLists: action.cats,
       };
     case UPDATE_CATS_DATA_LIKE:
     case UPDATE_CATS_DATA_COMMENT:

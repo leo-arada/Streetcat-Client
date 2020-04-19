@@ -17,6 +17,7 @@ import {
   LOADING,
   LOG_OUT,
   GET_USER_LOCATION,
+  UPDATE_CATS_DATA,
 } from '../constants';
 
 export const logInSuccessCat = (cats) => {
@@ -54,6 +55,10 @@ export const clickedCat = (catIndex) => {
 export const updateAcatForLike = (cat) => {
   return { type: UPDATE_CATS_DATA_LIKE, cat };
 }
+
+export const updateCatsData = (cats) => {
+  return { type: UPDATE_CATS_DATA, cats };
+};
 
 export const modifyAcat = (cat) => {
   return { type: MODIFY_CAT_DATA, cat };
